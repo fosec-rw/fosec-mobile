@@ -59,7 +59,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
             child: Column(
               children: [
                 Text(
-                  'Welcome back!',
+                  'Create Account',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
