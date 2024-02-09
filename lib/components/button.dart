@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
-  const Button({super.key});
+  final String text;
+  const Button({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class Button extends StatelessWidget {
               0xFF0F4901), // Replace 0xFF0F4901 with your desired hex color code
         ),
       ),
-      child: Text('Login'),
+      child: Text(text),
     );
   }
 }

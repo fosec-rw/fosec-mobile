@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
+import 'package:fosec/components/text_field.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({Key? key}) : super(key: key);
@@ -11,50 +12,67 @@ class CreateAccountPage extends StatefulWidget {
 }
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
+  final nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(239, 255, 239, 1),
       body: Stack(
         children: [
           // Gradient App Bar
           MainAppBar(),
 
           // Login Form
-          Container(
-            margin: EdgeInsets.fromLTRB(14.0, 140.0, 14.0, 75.0),
-            padding: EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Add your login form widgets here
-                // For example: TextFields, Buttons, etc.
-                TextField(
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade400),
-                      ),
-                      fillColor: const Color.fromARGB(255, 226, 246, 220),
-                      filled: true,
-                      hintText: "Username",
-                      hintStyle: TextStyle(color: Colors.grey[500])),
+          Column(
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(14.0, 130.0, 14.0, 14.0),
+                padding: EdgeInsets.all(16.0),
+                height: 400,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
-                SizedBox(height: 16.0),
-                
-                SizedBox(height: 16.0),
-                Button(),
-              ],
-            ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Add your login form widgets here
+                    // For example: TextFields, Buttons, etc.
+                    FormTextField(
+                        controller: nameController,
+                        obscureText: false,
+                        hintText: "Name"),
+                    SizedBox(height: 16.0),
+                    FormTextField(
+                        controller: nameController,
+                        obscureText: true,
+                        hintText: "Password"),
+                    SizedBox(height: 16.0),
+
+                    Button(
+                      text: "Create Account",
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Container(
+                height: 60,
+                margin: EdgeInsets.fromLTRB(14.0, 50.0, 14.0, 14.0),
+                padding: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Text("Already have an account? Sign in"),
+              )
+            ],
           ),
 
           Positioned(
-            top: 80.0, // Adjust the distance from the top
+            top: 70.0, // Adjust the distance from the top
             left: 40.0, // Adjust the distance from the left
             child: Column(
               children: [
