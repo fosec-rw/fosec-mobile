@@ -50,7 +50,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     SizedBox(height: 16.0),
 
                     Button(
-                      text: "Create Account",
+                      text: "Next",
                     ),
                   ],
                 ),

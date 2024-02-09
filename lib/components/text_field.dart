@@ -26,16 +26,20 @@ class _FormTextFieldState extends State<FormTextField> {
         obscureText: widget.obscureText,
         controller: widget.controller,
         decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade400),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade700),
-            ),
-            fillColor: const Color.fromRGBO(255, 255, 255, 1),
-            filled: true,
-            hintText: widget.hintText,
-            hintStyle: TextStyle(color: Colors.grey[400])),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade700),
+          ),
+          fillColor: const Color.fromRGBO(255, 255, 255, 1),
+          filled: true,
+          hintText: widget.hintText,
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+            fontFamily: 'Poppins',
+          ),
+        ),
       ),
     );
   }
