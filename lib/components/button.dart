@@ -18,12 +18,12 @@ class Button extends StatelessWidget {
           Color(0xFF0F4901),
         ),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
-          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          EdgeInsets.symmetric(vertical: 13, horizontal: 50),
         ),
       ),
       child: Text(
         text,
-        style: TextStyle(fontFamily: 'Poppins'),
+        style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w500),
       ),
     );
   }
