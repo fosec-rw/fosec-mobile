@@ -2,17 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
+import 'package:fosec/components/label.dart';
 import 'package:fosec/components/text_field.dart';
 
 class RegisterForm extends StatefulWidget {
   final String title;
   final String formTitle;
 
-  RegisterForm({
-    Key? key,
-    required this.title,
-    required this.formTitle
-  }) : super(key: key);
+  RegisterForm({Key? key, required this.title, required this.formTitle})
+      : super(key: key);
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -52,25 +50,32 @@ class _RegisterFormState extends State<RegisterForm> {
                     SizedBox(
                       height: 20,
                     ),
+                    FieldLabel(
+                      label: "Name *",
+                    ),
+                    SizedBox(height: 10.0),
                     FormTextField(
                       controller: nameController,
                       obscureText: false,
                       hintText: "example@gmail.com",
-                      label: "Name",
                     ),
                     SizedBox(height: 16.0),
+                    FieldLabel(label: "Phone *"),
+                    SizedBox(height: 10.0),
                     FormTextField(
                       controller: nameController,
                       obscureText: true,
                       hintText: "example@gmail.com",
-                      label: "Phone",
                     ),
                     SizedBox(height: 16.0),
+                    FieldLabel(
+                      label: "Password *",
+                    ),
+                    SizedBox(height: 10.0),
                     FormTextField(
                       controller: nameController,
                       obscureText: false,
                       hintText: "example@gmail.com",
-                      label: "Password",
                     ),
                     SizedBox(height: 16.0),
                     Button(

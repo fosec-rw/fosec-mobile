@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
+import 'package:fosec/components/label.dart';
 import 'package:fosec/components/text_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -35,16 +36,8 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 // Add your login form widgets here
                 // For example: TextFields, Buttons, etc.
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Name",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                  ],
+                FieldLabel(
+                  label: "Name *",
                 ),
                 SizedBox(
                   height: 10,
@@ -53,28 +46,35 @@ class _LoginPageState extends State<LoginPage> {
                   controller: nameController,
                   obscureText: false,
                   hintText: "example@gmail.com",
-                  label: "Name",
                 ),
                 SizedBox(
                   height: 16,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Password",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                  ],
+                FieldLabel(
+                  label: "Password *",
                 ),
                 SizedBox(height: 10.0),
                 FormTextField(
                   controller: passwordController,
                   obscureText: true,
                   hintText: "example@gmail.com",
-                  label: "Password",
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Remember me",
+                      style: TextStyle(fontFamily: 'Poppins', fontSize: 13),
+                    ),
+                    Text(
+                      "Forgot Password",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          color: Color(0xFF0F4901),
+                          fontSize: 13),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 16.0),
                 Button(text: "Sign In"),

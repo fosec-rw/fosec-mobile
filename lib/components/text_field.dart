@@ -6,13 +6,11 @@ class FormTextField extends StatefulWidget {
   final bool obscureText;
   final TextEditingController controller;
   final String hintText; // Changed the type to TextEditingController
-  final String label;
   FormTextField({
     Key? key,
     required this.controller,
     required this.obscureText,
     required this.hintText,
-    required this.label,
   }) : super(key: key);
 
   @override
@@ -43,13 +41,7 @@ class _FormTextFieldState extends State<FormTextField> {
               fontWeight: FontWeight.w100,
               fontSize: 15,
             ),
-            label: Text(widget.label),
-            labelStyle: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Outfit',
-              fontWeight: FontWeight.w300,
-              fontSize: 16,
-            )),
+            ),
       ),
     );
   }
