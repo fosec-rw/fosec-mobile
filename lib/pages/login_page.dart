@@ -2,15 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
+import 'package:fosec/components/text_field.dart';
 
-class CreateAccountPage extends StatefulWidget {
-  const CreateAccountPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<CreateAccountPage> createState() => _CreateAccountPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _CreateAccountPageState extends State<CreateAccountPage> {
+class _LoginPageState extends State<LoginPage> {
+  final nameController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,29 +35,55 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               children: [
                 // Add your login form widgets here
                 // For example: TextFields, Buttons, etc.
-                TextField(
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Name",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade400),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                FormTextField(
+                  controller: nameController,
+                  obscureText: false,
+                  hintText: "example@gmail.com",
+                  label: "Name",
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Password",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
                       ),
-                      fillColor: const Color.fromARGB(255, 226, 246, 220),
-                      filled: true,
-                      hintText: "Username",
-                      hintStyle: TextStyle(color: Colors.grey[500])),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10.0),
+                FormTextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  hintText: "example@gmail.com",
+                  label: "Password",
                 ),
                 SizedBox(height: 16.0),
-                
-                SizedBox(height: 16.0),
-                Button(text: "Sign In", onPressed: () {  },),
+                Button(text: "Sign In"),
               ],
             ),
           ),
 
           Positioned(
-            top: 80.0, // Adjust the distance from the top
+            top: 70.0, // Adjust the distance from the top
             left: 40.0, // Adjust the distance from the left
             child: Column(
               children: [
@@ -63,6 +92,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
+                    fontFamily: 'Poppins',
                   ),
                 ),
               ],

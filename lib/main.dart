@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:fosec/pages/create_account.dart';
-// import 'package:fosec/pages/register_form.dart';
+import 'package:fosec/pages/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CreateAccountPage(),
+      home: LoginPage(),
+
+      // RegisterForm(
+      //     title: "Create Account", formTitle: "Personal Information"),
     );
   }
 }

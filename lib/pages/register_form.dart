@@ -7,13 +7,11 @@ import 'package:fosec/components/text_field.dart';
 class RegisterForm extends StatefulWidget {
   final String title;
   final String formTitle;
-  final VoidCallback onNext;
 
   RegisterForm({
     Key? key,
     required this.title,
-    required this.formTitle,
-    required this.onNext,
+    required this.formTitle
   }) : super(key: key);
 
   @override
@@ -77,7 +75,6 @@ class _RegisterFormState extends State<RegisterForm> {
                     SizedBox(height: 16.0),
                     Button(
                       text: "Next",
-                      onPressed: widget.onNext,
                     ),
                   ],
                 ),
