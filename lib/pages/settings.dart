@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:fosec/pages/homepage.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -18,6 +19,15 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          },
+          icon: Icon(Icons.arrow_back_rounded),
+        ),
         title: Text(
           'Settings',
           style: TextStyle(

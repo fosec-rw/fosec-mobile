@@ -1,6 +1,11 @@
+// lib/pages/homepage.dart
+
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:fosec/components/tips_card.dart';
+import 'package:fosec/pages/messages_list.dart';
+import 'package:fosec/pages/settings.dart'; // Import the SettingsPage
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -22,6 +27,18 @@ class _HomePageState extends State<HomePage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingsPage()),
+        );
+      } else if (index == 3) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MessagesListScreen()),
+        );
+      }
+      // Add other navigation if needed for other tabs
     });
   }
 
