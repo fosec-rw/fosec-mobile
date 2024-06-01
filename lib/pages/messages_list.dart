@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:fosec/components/message_tile.dart';
 import 'package:fosec/pages/chat_screen.dart';
 import 'package:fosec/pages/homepage.dart';
 import 'package:fosec/pages/settings.dart';
@@ -10,13 +11,14 @@ const kPrimaryColor = Color(0xFF1A8500);
 const kSecondaryColor = Color(0xFF444444);
 const kLogoutColor = Color(0xFFEA4335);
 const kPadding = EdgeInsets.all(10.0);
+
 class MessagesListScreen extends StatelessWidget {
   const MessagesListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         elevation: 0,
@@ -30,10 +32,11 @@ class MessagesListScreen extends StatelessWidget {
             // handle back press
           },
         ),
-        title: Text('Messages', style: TextStyle(color: Colors.white)),
+        title: Text('Messages',
+            style: TextStyle(color: Colors.white, fontFamily: 'Poppins')),
       ),
       body: ListView.builder(
-        itemCount: 10, // or use the actual length of your messages list
+        itemCount: 15, // or use the actual length of your messages list
         itemBuilder: (context, index) {
           // Here you should define your message object or model
           // Let's assume you have a Message class with text, isCurrentUser, and time properties
@@ -44,32 +47,43 @@ class MessagesListScreen extends StatelessWidget {
             time: DateTime.now(),
           );
 
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage('images/profile.png'),
-            ),
-            title: Text('Lauren Spencer'),
-            subtitle: Text(
-                'Tractors have revolutionized modern farming practices...'),
-            trailing: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text('2:37 PM'),
-                Icon(Icons.check_circle, color: Colors.green, size: 20),
-              ],
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChatScreen(
-                    text: message.text,
-                    isCurrentUser: message.isCurrentUser,
-                    time: message.time,
+          return MessageTile(
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage('images/profile.png'),
+              ),
+              title: Text(
+                'Lauren Spencer',
+                style: TextStyle(
+                    fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+              ),
+              subtitle: Text(
+                'Tractors have revolutionized modern farming practices...',
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 10),
+              ),
+              trailing: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    '2:37 PM',
+                    style: TextStyle(fontFamily: 'Poppins', fontSize: 11),
                   ),
-                ),
-              );
-            },
+                  Icon(Icons.check_circle, color: Color(0xFF0F4901), size: 20),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                      text: message.text,
+                      isCurrentUser: message.isCurrentUser,
+                      time: message.time,
+                    ),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),

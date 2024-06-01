@@ -1,5 +1,6 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen(
@@ -22,7 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFE8F5E9),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4CAF50),
+        backgroundColor: Color(0xFF24880C),
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
@@ -39,9 +40,14 @@ class _ChatScreenState extends State<ChatScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Lauren Spencer', style: TextStyle(color: Colors.white)),
+                Text('Lauren Spencer',
+                    style:
+                        TextStyle(color: Colors.white, fontFamily: 'Poppins')),
                 Text('online',
-                    style: TextStyle(color: Colors.white70, fontSize: 14)),
+                    style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                        fontFamily: 'Poppins')),
               ],
             ),
           ],

@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/components/tips_card.dart';
 import 'package:fosec/pages/messages_list.dart';
+import 'package:fosec/pages/qr-scanning/start-scanning.dart';
 import 'package:fosec/pages/settings.dart'; // Import the SettingsPage
 
 const kBackgroundColor = Color(0xFFEFFFEF);
@@ -96,8 +97,8 @@ class _HomePageState extends State<HomePage> {
             height: 27,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.grey, // Placeholder color
             ),
+            child: Image.asset("images/profile.png"),
           ),
           SizedBox(width: 16),
         ],
@@ -143,7 +144,10 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.message, color: kPrimaryColor),
               title: Text('Messages'),
               onTap: () {
-                // Handle the tap event
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MessagesListScreen()));
               },
             ),
             ListTile(
@@ -158,6 +162,8 @@ class _HomePageState extends State<HomePage> {
               title: Text('QR Scan'),
               onTap: () {
                 // Handle the tap event
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => ScanCode())));
               },
             ),
           ],
@@ -211,7 +217,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Image.asset(
-                'images/image.png',
+                'images/spotlight.png',
                 fit: BoxFit.cover,
               ),
             ),

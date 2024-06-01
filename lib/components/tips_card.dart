@@ -75,21 +75,23 @@ class Tips extends StatelessWidget {
                   maxLines: 3,
                   style: TextStyle(color: Color(0xFF696969), fontSize: 13),
                 ),
-                Container(
-                  width: 25,
-                  height: 25,
-                  margin: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFEFFFEF),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      )),
-                  child: Icon(
-                    Icons.arrow_forward,
-                    size: 15,
-                    color: Colors.black,
+                Center(
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    margin: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xFFEFFFEF),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        )),
+                    child: Icon(
+                      Icons.arrow_forward,
+                      size: 15,
+                      color: Colors.black,
+                    ),
                   ),
                 )
               ],

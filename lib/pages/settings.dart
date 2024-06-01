@@ -21,10 +21,7 @@ class SettingsPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
+            Navigator.pop(context);
           },
           icon: Icon(Icons.arrow_back_rounded),
         ),
