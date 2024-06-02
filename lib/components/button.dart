@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
   final String text;
+  final VoidCallback? onPressed;
 
-  const Button({Key? key, required this.text}) : super(key: key);
+  const Button({Key? key, required this.text, this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        // Implement your logic here
-      },
+      onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(
           Color(0xFF0F4901),
@@ -23,7 +23,10 @@ class Button extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+        style: TextStyle(
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w500,
+            color: Colors.white),
       ),
     );
   }

@@ -4,20 +4,25 @@ import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
 import 'package:fosec/components/label.dart';
 import 'package:fosec/components/text_field.dart';
+import 'package:fosec/pages/login_page.dart';
 
-class RegisterForm extends StatefulWidget {
+class ProjectForm extends StatefulWidget {
   final String title;
   final String formTitle;
 
-  RegisterForm({Key? key, required this.title, required this.formTitle})
+  ProjectForm({Key? key, required this.title, required this.formTitle})
       : super(key: key);
 
   @override
-  State<RegisterForm> createState() => _RegisterFormState();
+  State<ProjectForm> createState() => _ProjectFormState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
+class _ProjectFormState extends State<ProjectForm> {
   final nameController = TextEditingController();
+
+  void onPressed(){
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +30,12 @@ class _RegisterFormState extends State<RegisterForm> {
       backgroundColor: Color.fromRGBO(239, 255, 239, 1),
       body: Stack(
         children: [
-          MainAppBar(),
+          MainAppBar(onPressed: onPressed,),
           Column(
             children: [
               Container(
                 margin: EdgeInsets.fromLTRB(14.0, 130.0, 14.0, 0.0),
                 padding: EdgeInsets.all(15.0),
-                height: 430,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8.0),
@@ -51,7 +55,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       height: 20,
                     ),
                     FieldLabel(
-                      label: "Name *",
+                      label: "Project Name *",
                     ),
                     SizedBox(height: 10.0),
                     FormTextField(
@@ -60,7 +64,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       hintText: "example@gmail.com",
                     ),
                     SizedBox(height: 16.0),
-                    FieldLabel(label: "Phone *"),
+                    FieldLabel(label: "Current Location *"),
                     SizedBox(height: 10.0),
                     FormTextField(
                       controller: nameController,
@@ -69,13 +73,29 @@ class _RegisterFormState extends State<RegisterForm> {
                     ),
                     SizedBox(height: 16.0),
                     FieldLabel(
-                      label: "Password *",
+                      label: "Description for the project *",
                     ),
                     SizedBox(height: 10.0),
-                    FormTextField(
+                    TextField(
                       controller: nameController,
-                      obscureText: false,
-                      hintText: "example@gmail.com",
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade400),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade700),
+                        ),
+                        fillColor: const Color.fromRGBO(255, 255, 255, 1),
+                        filled: true,
+                        hintText: "Project Description",
+                        hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontFamily: 'Outfit',
+                          fontWeight: FontWeight.w100,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                     SizedBox(height: 16.0),
                     Button(
@@ -105,12 +125,35 @@ class _RegisterFormState extends State<RegisterForm> {
                   ],
                 ),
                 child: Center(
-                  child: Text(
-                    "Already have an account? Sign in",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins',
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already have an account?",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => LoginPage())));
+                        },
+                        child: Text(
+                          "Log in",
+                          style: TextStyle(
+                              color: Color(0xFF1A8500),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins'),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               )

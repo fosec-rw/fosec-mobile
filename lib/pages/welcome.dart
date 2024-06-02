@@ -11,7 +11,7 @@ class GetStartedScreen extends StatelessWidget {
   bool isUserLoggedIn() {
     // Replace this with actual authentication logic
     // For example, checking a token in shared preferences or a user session
-    return true; // Change this to false if you want to simulate a logged-in user
+    return false; // Change this to true if you want to simulate a logged-in user
   }
 
   @override

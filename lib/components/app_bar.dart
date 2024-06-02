@@ -2,11 +2,15 @@
 
 import 'package:flutter/material.dart';
 
-class MainAppBar extends StatefulWidget {
-  const MainAppBar({super.key});
+class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
+  final VoidCallback? onPressed;
+  const MainAppBar({super.key, this.onPressed});
 
   @override
   State<MainAppBar> createState() => _MainAppBarState();
+
+  @override
+  Size get preferredSize => Size.fromHeight(350.0);
 }
 
 class _MainAppBarState extends State<MainAppBar> {
@@ -14,17 +18,20 @@ class _MainAppBarState extends State<MainAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
-      leading: Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-        ),
-        child: Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-          size: 20,
+      elevation: 0,
+      leadingWidth: 70, // Adjust the width as necessary
+      leading: Center(
+        child: Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+          ),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back, size: 20, color: Colors.black),
+            onPressed: widget.onPressed,
+          ),
         ),
       ),
       flexibleSpace: Container(

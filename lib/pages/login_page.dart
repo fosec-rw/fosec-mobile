@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
 import 'package:fosec/components/label.dart';
+import 'package:fosec/components/square_tile.dart';
 import 'package:fosec/components/text_field.dart';
+import 'package:fosec/pages/create-account/register_form.dart';
+import 'package:fosec/pages/sign_up_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -78,6 +81,86 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 16.0),
                 Button(text: "Sign In"),
+                SizedBox(
+                  height: 25,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.symmetric(horizontal: 25),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.8,
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "Or",
+                          style: TextStyle(color: Colors.grey[700]),
+                        ),
+                      ),
+                      Expanded(
+                          child: Divider(
+                        thickness: 0.8,
+                        color: Colors.grey[400],
+                      ))
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RectangleTile(
+                      imagePath: 'icons/google.png',
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 35),
+
+                //not a member? sign up
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins'),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => RegisterForm(
+                                          formTitle: "Personal Information",
+                                          title: "Create Account",
+                                        ))));
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                                color: Color(0xFF1A8500),
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Poppins'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
