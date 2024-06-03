@@ -23,13 +23,13 @@ class _MainAppBarState extends State<MainAppBar> {
       leading: Center(
         child: Container(
           margin: EdgeInsets.all(10),
-          padding: EdgeInsets.all(5),
+          // padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,
           ),
           child: IconButton(
-            icon: Icon(Icons.arrow_back, size: 20, color: Colors.black),
+            icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: widget.onPressed,
           ),
         ),

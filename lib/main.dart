@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-// import 'package:fosec/pages/homepage.dart';
+// import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/welcome.dart';
 
 void main() {
@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: GetStartedScreen(),
+      home:
+          GetStartedScreen()
+          // UpdateProfile(),
     );
   }
 }

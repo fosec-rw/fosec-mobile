@@ -5,7 +5,9 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/components/tips_card.dart';
 import 'package:fosec/pages/messages_list.dart';
-import 'package:fosec/pages/qr-scanning/start-scanning.dart';
+import 'package:fosec/pages/profile.dart';
+import 'package:fosec/pages/qr-code/generate_code.dart';
+import 'package:fosec/pages/qr-code/start-scanning.dart';
 import 'package:fosec/pages/settings.dart'; // Import the SettingsPage
 
 const kBackgroundColor = Color(0xFFEFFFEF);
@@ -92,13 +94,19 @@ class _HomePageState extends State<HomePage> {
             ),
             onPressed: () {},
           ),
-          Container(
-            width: 27,
-            height: 27,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => UpdateProfile()));
+            },
+            child: Container(
+              width: 27,
+              height: 27,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: Image.asset("images/profile.png"),
             ),
-            child: Image.asset("images/profile.png"),
           ),
           SizedBox(width: 16),
         ],
@@ -164,6 +172,15 @@ class _HomePageState extends State<HomePage> {
                 // Handle the tap event
                 Navigator.push(context,
                     MaterialPageRoute(builder: ((context) => ScanCode())));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.qr_code_scanner, color: kPrimaryColor),
+              title: Text('QR Generate'),
+              onTap: () {
+                // Handle the tap event
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => GenerateCode())));
               },
             ),
           ],

@@ -37,6 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   dynamic_multi_step_form: ^1.1.3+3
   http: ^1.1.0
+  qr_flutter: ^4.0.1
+  qr_code_scanner: ^1.0.1
+  printing: ^5.12.0
+  pdf: ^3.10.8
 
 dev_dependencies:
   flutter_test:
