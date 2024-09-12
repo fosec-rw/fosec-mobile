@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
@@ -8,6 +10,7 @@ import 'package:fosec/components/text_field.dart';
 import 'package:fosec/pages/create-account/register_form.dart';
 import 'package:fosec/pages/homepage.dart';
 import 'package:fosec/pages/welcome.dart';
+import 'package:fosec/services/user_services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,8 +20,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final nameController = TextEditingController();
+  final UserService userService = UserService();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
+  final errorController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +55,16 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Add your login form widgets here
                         FieldLabel(
-                          label: "Name *",
+                          label: "Phone *",
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         FormTextField(
-                          controller: nameController,
+                          controller: phoneController,
                           obscureText: false,
-                          hintText: "example@gmail.com",
+                          hintText: "Enter your phone number",
                         ),
                         SizedBox(
                           height: 15,
@@ -71,7 +76,15 @@ class _LoginPageState extends State<LoginPage> {
                         FormTextField(
                           controller: passwordController,
                           obscureText: true,
-                          hintText: "example@gmail.com",
+                          hintText: "Enter your password",
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          errorController.text,
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 14.0,
+                          ),
                         ),
                         SizedBox(height: 10),
                         Row(
@@ -93,13 +106,44 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(height: 16.0),
                         Button(
-                          text: "Sign In",
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage()));
-                          },
+                          text: _isLoading ? "Loading..." : "Sign In",
+                          onPressed: _isLoading
+                              ? null
+                              : () async {
+                                  setState(() {
+                                    _isLoading = true; // Start loading
+                                  });
+
+                                  try {
+                                    final response =
+                                        await userService.loginUser({
+                                      'phone': phoneController.text,
+                                      'password': passwordController.text,
+                                    });
+
+                                    final responseData = json.decode(response);
+                                    if (responseData
+                                        .containsKey('accessToken')) {
+                                      // Login successful, navigate to home page
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage()),
+                                      );
+                                    } else {
+                                      // Handle login error (e.g., show a message)
+                                      errorController.text =
+                                          "Login failed - wrong credentials";
+                                    }
+                                  } catch (e) {
+                                    // Handle other errors (e.g., network issues)
+                                    errorController.text = ("Network error");
+                                  } finally {
+                                    setState(() {
+                                      _isLoading = false; // Stop loading
+                                    });
+                                  }
+                                },
                         ),
                         SizedBox(
                           height: 25,

@@ -6,11 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fosec/components/button.dart';
 import 'package:fosec/components/label.dart';
 import 'package:fosec/components/text_field.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:printing/printing.dart';
-import 'package:fosec/pages/qr-code/display_code.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
+import 'display_code.dart';
 
 class GenerateCode extends StatefulWidget {
   const GenerateCode({super.key});
@@ -88,71 +84,25 @@ class _GenerateCodeState extends State<GenerateCode> {
                 obscureText: false,
               ),
               SizedBox(height: 20),
-              Button(
-                onPressed: () {
-                  // Generate the QR data from the input fields
-                  setState(() {
-                    qrData =
-                        'Goods: ${goodsTypeController.text}, Quantity: ${quantityController.text}, From: ${sourceController.text}, To: ${destinationController.text}, Plate: ${plateNumberController.text}';
-                  });
-                },
-                text: "Generate QR Code",
-              ),
-              SizedBox(height: 20),
-              if (qrData != null)
-                Center(
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to the DisplayQRCodePage
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DisplayQRCodePage(data: qrData!),
-                            ),
-                          );
-                        },
-                        child: QrImageView(
-                          data: qrData!,
-                          version: QrVersions.auto,
-                          size: 200.0,
-                        ),
+              Center(
+                child: Button(
+                  onPressed: () {
+                    // Generate the QR data from the input fields
+                    setState(() {
+                      qrData =
+                          'Goods: ${goodsTypeController.text}, Quantity: ${quantityController.text}, From: ${sourceController.text}, To: ${destinationController.text}, Plate: ${plateNumberController.text}';
+                    });
+                    // Navigate to the DisplayQRCodePage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DisplayQRCodePage(data: qrData!),
                       ),
-                      SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Print the QR code
-                          Printing.layoutPdf(
-                            onLayout: (PdfPageFormat format) async {
-                              final doc = pw.Document();
-                              final qrImage = await QrPainter(
-                                data: qrData!,
-                                version: QrVersions.auto,
-                                gapless: true,
-                                color: Colors.black,
-                                emptyColor: Colors.white,
-                              ).toImageData(200);
-                              final image =
-                                  pw.MemoryImage(qrImage! as Uint8List);
-
-                              doc.addPage(
-                                pw.Page(
-                                  build: (pw.Context context) => pw.Center(
-                                    child: pw.Image(image),
-                                  ),
-                                ),
-                              );
-                              return doc.save();
-                            },
-                          );
-                        },
-                        child: Text("Print QR Code"),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
+                  text: "Generate QR Code",
                 ),
+              ),
             ],
           ),
         ),

@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:fosec/components/button.dart';
 import 'package:fosec/components/label.dart';
 import 'package:fosec/components/text_field.dart';
+import 'package:fosec/pages/Chats/messages_list.dart';
+import 'package:fosec/pages/homepage.dart';
+import 'package:fosec/pages/settings.dart';
+
+const kPrimaryColor = Color(0xFF1A8500);
+const kGreyColor = Color(0xFF808080);
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({super.key});
@@ -18,6 +24,30 @@ class _UpdateProfileState extends State<UpdateProfile> {
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
+
+  int _selectedIndex = 2;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingsPage()),
+        );
+      } else if (index == 3) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MessagesListScreen()),
+        );
+      } else if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      }
+    });
+  }
 
   bool obscureText = false; // Placeholder for the obscureText property
 
@@ -137,6 +167,31 @@ class _UpdateProfileState extends State<UpdateProfile> {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: "Profile",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message_rounded),
+            label: "Messages",
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: kPrimaryColor,
+        unselectedItemColor: kGreyColor,
+        onTap: _onItemTapped,
+        showUnselectedLabels: true,
       ),
     );
   }

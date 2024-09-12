@@ -28,10 +28,12 @@ class _RegisterFormState extends State<RegisterForm> {
   bool isError = false;
 
   final _formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
-  String selectedCategory = 'Farmer';
+  final errorController = TextEditingController();
+  String selectedCategory = '';
 
   @override
   Widget build(BuildContext context) {
@@ -71,16 +73,32 @@ class _RegisterFormState extends State<RegisterForm> {
                           height: 20,
                         ),
                         FieldLabel(
-                          label: "Name *",
+                          label: "First Name *",
                         ),
                         SizedBox(height: 10.0),
                         FormTextField(
-                          controller: nameController,
+                          controller: firstNameController,
                           obscureText: false,
-                          hintText: "Enter your name",
+                          hintText: "Enter your first name",
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your name';
+                              return 'Please enter your first name';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 16.0),
+                        FieldLabel(
+                          label: "Last Name *",
+                        ),
+                        SizedBox(height: 10.0),
+                        FormTextField(
+                          controller: lastNameController,
+                          obscureText: false,
+                          hintText: "Enter your last name",
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your last name';
                             }
                             return null;
                           },
@@ -165,7 +183,15 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 16.0),
+                        SizedBox(height: 12.0),
+                        Text(
+                          errorController.text,
+                          style: TextStyle(
+                              color: const Color.fromARGB(255, 147, 14, 5),
+                              fontSize: 14.0,
+                              fontFamily: 'Poppins'),
+                        ),
+                        SizedBox(height: 15.0),
                         Button(
                             text: _isLoading ? "Loading..." : "Next",
                             onPressed: _isLoading
@@ -179,9 +205,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                       try {
                                         final response =
                                             await userService.registerUser({
-                                          'firstName': nameController.text,
-                                          'lastName': nameController
-                                              .text, // Assuming you have a separate field for lastName
+                                          'firstName': firstNameController.text,
+                                          'lastName': lastNameController.text,
                                           'phone': phoneController.text,
                                           'password': passwordController.text,
                                           'role': selectedCategory,
@@ -204,12 +229,17 @@ class _RegisterFormState extends State<RegisterForm> {
                                           );
                                         } else {
                                           // Handle registration error (e.g., show a message)
-                                          print(
+                                          debugPrint(
                                               "Registration failed: $response");
+                                          errorController.text =
+                                              "Registration failed, try again";
                                         }
                                       } catch (e) {
                                         // Handle other errors (e.g., network issues)
-                                        print("Error during registration: $e");
+                                        debugPrint(
+                                            "Error during registration: $e");
+                                        errorController.text =
+                                            "Our servers are down, try again later";
                                       } finally {
                                         setState(() {
                                           _isLoading = false; // Stop loading

@@ -32,20 +32,15 @@ class _ChatBotState extends State<ChatBot> {
         title: Row(
           children: <Widget>[
             CircleAvatar(
-              backgroundImage: AssetImage('images/profile.png'),
+              backgroundImage: AssetImage('images/chat-box.png'),
             ),
             SizedBox(width: 8.0),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Chatbot',
+                Text('Chat',
                     style:
                         TextStyle(color: Colors.white, fontFamily: 'Poppins')),
-                Text('online',
-                    style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                        fontFamily: 'Poppins')),
               ],
             ),
           ],
@@ -114,9 +109,7 @@ class _ChatBotState extends State<ChatBot> {
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
               child: Text(
                 message.text,
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
+                style: TextStyle(fontSize: 16.0, fontFamily: 'Poppins'),
               ),
             ),
           ),
@@ -124,9 +117,7 @@ class _ChatBotState extends State<ChatBot> {
           Text(
             "${message.time.hour}:${message.time.minute}",
             style: TextStyle(
-              color: Colors.grey,
-              fontSize: 12.0,
-            ),
+                color: Colors.grey, fontSize: 12.0, fontFamily: 'Poppins'),
           ),
         ],
       ),
@@ -178,5 +169,6 @@ class Message {
   final bool isCurrentUser;
   final DateTime time;
 
-  Message({required this.text, required this.isCurrentUser, required this.time});
+  Message(
+      {required this.text, required this.isCurrentUser, required this.time});
 }

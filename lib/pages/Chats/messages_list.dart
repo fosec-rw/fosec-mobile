@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fosec/components/message_tile.dart';
-import 'package:fosec/pages/chat_screen.dart';
+import 'package:fosec/pages/Chats/chat_screen.dart';
 import 'package:fosec/pages/homepage.dart';
+import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/settings.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
@@ -96,6 +97,12 @@ class MessagesListScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => HomePage()),
             );
           }
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UpdateProfile()),
+            );
+          }
           if (index == 1) {
             Navigator.push(
               context,
@@ -104,7 +111,7 @@ class MessagesListScreen extends StatelessWidget {
           }
         },
         selectedItemColor: kPrimaryColor,
-        unselectedItemColor: kGreyColor,
+        // unselectedItemColor: kGreyColor,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

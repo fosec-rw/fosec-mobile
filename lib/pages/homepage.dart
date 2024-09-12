@@ -4,11 +4,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:fosec/components/tips_card.dart';
-import 'package:fosec/pages/messages_list.dart';
+import 'package:fosec/pages/Chats/messages_list.dart';
+import 'package:fosec/pages/Chats/chat_bot.dart';
+import 'package:fosec/pages/location.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
 import 'package:fosec/pages/qr-code/start-scanning.dart';
-import 'package:fosec/pages/settings.dart'; // Import the SettingsPage
+import 'package:fosec/pages/settings.dart';
+import 'package:fosec/pages/tips.dart';
+import 'package:fosec/pages/weather.dart'; // Import the SettingsPage
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -40,8 +44,12 @@ class _HomePageState extends State<HomePage> {
           context,
           MaterialPageRoute(builder: (context) => MessagesListScreen()),
         );
+      } else if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => UpdateProfile()),
+        );
       }
-      // Add other navigation if needed for other tabs
     });
   }
 
@@ -105,7 +113,10 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child: Image.asset("images/profile.png"),
+              child: Icon(
+                Icons.person_4,
+                color: kPrimaryColor,
+              ),
             ),
           ),
           SizedBox(width: 16),
@@ -131,21 +142,26 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.wb_sunny, color: kPrimaryColor),
               title: Text('Weather'),
               onTap: () {
-                // Handle the tap event
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WeatherPage()),
+                );
               },
             ),
             ListTile(
-              leading: Icon(Icons.lightbulb_outline, color: kPrimaryColor),
-              title: Text('AI Tips'),
+              leading: Icon(Icons.adb_rounded, color: kPrimaryColor),
+              title: Text('AI Chatbot'),
               onTap: () {
-                // Handle the tap event
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => ChatBot())));
               },
             ),
             ListTile(
               leading: Icon(Icons.location_on, color: kPrimaryColor),
               title: Text('Location'),
               onTap: () {
-                // Handle the tap event
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => Location())));
               },
             ),
             ListTile(
@@ -162,7 +178,10 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.tips_and_updates, color: kPrimaryColor),
               title: Text('General Tips'),
               onTap: () {
-                // Handle the tap event
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TipsPage()),
+                );
               },
             ),
             ListTile(

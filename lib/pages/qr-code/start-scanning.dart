@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/pages/qr-code/scan_result.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'dart:async'; // Import for Timer
 
 class ScanCode extends StatefulWidget {
   const ScanCode({super.key});
@@ -15,10 +16,12 @@ class _ScanCodeState extends State<ScanCode> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   bool isScanning = false;
+  Timer? scanTimer; // Timer variable
 
   @override
   void dispose() {
     controller?.dispose();
+    scanTimer?.cancel(); // Cancel the timer when disposing
     super.dispose();
   }
 
@@ -27,6 +30,7 @@ class _ScanCodeState extends State<ScanCode> {
     controller.scannedDataStream.listen((scanData) {
       if (scanData.code != null) {
         controller.pauseCamera();
+        scanTimer?.cancel(); // Cancel the timer if QR code is detected
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -42,6 +46,18 @@ class _ScanCodeState extends State<ScanCode> {
       isScanning = true;
     });
     controller?.resumeCamera();
+    scanTimer = Timer(
+        Duration(seconds: 15), _handleScanTimeout); // Set timer for 10 seconds
+  }
+
+  void _handleScanTimeout() {
+    // Navigate to a page indicating QR code tampering
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TamperedPage(),
+      ),
+    );
   }
 
   @override
@@ -125,6 +141,39 @@ class _ScanCodeState extends State<ScanCode> {
                   ),
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TamperedPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("QR Code Tampered"),
+        backgroundColor: Color(0xFF1A8500),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('images/tampered.png'),
+            SizedBox(
+              height: 25,
+            ),
+            Text(
+              "The QR code could not be detected or has been tampered with.",
+              style: TextStyle(
+                fontFamily: 'Outfit',
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.red,
+              ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

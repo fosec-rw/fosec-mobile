@@ -2,6 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:fosec/pages/homepage.dart';
+import 'package:fosec/pages/location.dart';
+import 'package:fosec/pages/login_page.dart';
+import 'package:fosec/pages/profile.dart';
+import 'package:fosec/pages/qr-code/generate_code.dart';
+import 'package:fosec/pages/qr-code/start-scanning.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -38,6 +43,10 @@ class SettingsPage extends StatelessWidget {
           _buildSettingsOption(
             icon: Icons.person,
             title: 'Profile',
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => UpdateProfile()));
+            },
           ),
           _buildSettingsOption(
             icon: Icons.phone,
@@ -58,13 +67,26 @@ class SettingsPage extends StatelessWidget {
           SizedBox(height: 16.0),
           _buildSectionHeader('App settings'),
           _buildSettingsOption(
-            icon: Icons.location_on,
-            title: 'Location',
-          ),
+              icon: Icons.location_on,
+              title: 'Location',
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => Location())));
+              }),
           _buildSettingsOption(
-            icon: Icons.qr_code_scanner,
-            title: 'QR scan',
-          ),
+              icon: Icons.qr_code_scanner,
+              title: 'QR scan',
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => ScanCode())));
+              }),
+          _buildSettingsOption(
+              icon: Icons.qr_code_scanner,
+              title: 'QR generate',
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => GenerateCode())));
+              }),
           _buildSettingsOption(
             icon: Icons.perm_device_information,
             title: 'Permissions',
@@ -74,7 +96,7 @@ class SettingsPage extends StatelessWidget {
             title: 'Theme',
           ),
           SizedBox(height: 32.0),
-          _buildLogoutOption(),
+          _buildLogoutOption(context),
         ],
       ),
     );
@@ -94,17 +116,16 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingsOption({required IconData icon, required String title}) {
+  Widget _buildSettingsOption(
+      {required IconData icon, required String title, VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(icon, color: kPrimaryColor),
       title: Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
-      onTap: () {
-        // Handle onTap if required
-      },
+      onTap: onTap,
     );
   }
 
-  Widget _buildLogoutOption() {
+  Widget _buildLogoutOption(BuildContext context) {
     return ListTile(
       leading: Icon(Icons.power_settings_new, color: kLogoutColor),
       title: Text(
@@ -116,6 +137,12 @@ class SettingsPage extends StatelessWidget {
       ),
       onTap: () {
         // Handle log out action
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => LoginPage()), // Navigate to login page
+          (route) => false, // Remove all routes on top of the login page
+        );
       },
     );
   }

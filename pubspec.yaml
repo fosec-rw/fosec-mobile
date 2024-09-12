@@ -69,6 +69,8 @@ flutter:
   - images/image.png
   - images/profile.png
   - images/spotlight.png
+  - images/chat-box.png
+  - images/tampered.png
   - icons/eco-plant.png
   - icons/icon-plant.png
   - icons/google.png
