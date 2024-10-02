@@ -76,10 +76,7 @@ class MessagesListScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                      text: message.text,
-                      isCurrentUser: message.isCurrentUser,
-                      time: message.time,
+                    builder: (context) => ChatPage(
                     ),
                   ),
                 );

@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
@@ -6,6 +8,7 @@ import 'package:fosec/components/label.dart';
 import 'package:fosec/components/text_field.dart';
 import 'package:fosec/pages/create-account/finish.dart';
 import 'package:fosec/pages/login_page.dart';
+import 'package:fosec/services/project_services.dart';
 
 class ProjectForm extends StatefulWidget {
   final String title;
@@ -19,10 +22,16 @@ class ProjectForm extends StatefulWidget {
 }
 
 class _ProjectFormState extends State<ProjectForm> {
+  final ProjectService projectService = ProjectService();
+  String data = 'Loading ...';
+  bool _isLoading = false;
+  bool isError = false;
+
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final locationController = TextEditingController();
   final descriptionController = TextEditingController();
+  final errorController = TextEditingController();
 
   void onPressed() {
     Navigator.pop(context);
@@ -126,15 +135,52 @@ class _ProjectFormState extends State<ProjectForm> {
                         ),
                         SizedBox(height: 16.0),
                         Button(
-                          text: "Next",
-                          onPressed: () {
-                            if (_formKey.currentState?.validate() ?? false) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => FinishRegister()));
-                            }
-                          },
+                          text: _isLoading ? data : "Next",
+                          onPressed: _isLoading
+                              ? null
+                              : () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    setState(() {
+                                      _isLoading = true; // Start loading
+                                    });
+
+                                    try {
+                                      final response = await projectService
+                                          .createProject({
+                                        'name': nameController.text,
+                                        'description':
+                                            descriptionController.text
+                                      });
+
+                                      final responseData =
+                                          json.decode(response);
+                                      if (responseData
+                                          .containsKey('accessToken')) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    FinishRegister()));
+                                      } else {
+                                        // Handle registration error (e.g., show a message)
+                                        debugPrint(
+                                            "Registration failed: $response");
+                                        errorController.text =
+                                            "Registration failed, try again";
+                                      }
+                                    } catch (e) {
+                                      // Handle other errors (e.g., network issues)
+                                      debugPrint(
+                                          "Error during registration: $e");
+                                      errorController.text =
+                                          "Our servers are down, try again later";
+                                    } finally {
+                                      setState(() {
+                                        _isLoading = false; // Stop loading
+                                      });
+                                    }
+                                  }
+                                },
                         ),
                       ],
                     ),

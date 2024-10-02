@@ -79,7 +79,7 @@ class UserService {
         case 400:
           throw Exception('Bad request: ${response.body}');
         case 409:
-          throw Exception('Conflict: User already exists'); // Example
+          throw Exception('Conflict: User already exists');
         default:
           throw Exception('Failed to register: ${response.body}');
       }

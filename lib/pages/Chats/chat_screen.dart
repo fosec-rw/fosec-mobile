@@ -1,36 +1,73 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+// ignore_for_file: unused_import, prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:http/http.dart' as http;
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen(
-      {Key? key,
-      required String text,
-      required bool isCurrentUser,
-      required DateTime time})
-      : super(key: key);
+class ChatPage extends StatefulWidget {
+  const ChatPage({super.key});
 
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
-  final List<ChatScreen> _messages = []; // List to hold chat messages
+class _ChatPageState extends State<ChatPage> {
+  final List<types.Message> _messages = [];
+  types.User? _user; // Nullable until we get the user data
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCurrentUser(); // Fetch the user data when the screen loads
+  }
+
+  Future<void> _fetchCurrentUser() async {
+    try {
+      final url = Uri.parse('https://red-hill-4858.fly.dev/api/v1/user/me');
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        // Parse the JSON and initialize the user
+        setState(() {
+          _user = types.User(
+            id: data['id'], // Ensure this matches the API response structure
+            firstName: data['first_name'], // Adapt this to your API fields
+            lastName: data['last_name'],
+          );
+        });
+      } else {
+        throw Exception('Failed to load user');
+      }
+    } catch (e) {
+      print('Error fetching user: $e');
+    }
+  }
+
+  void _handleSendPressed(types.PartialText message) {
+    if (_user == null)
+      return; // Prevent sending messages if the user is not yet fetched
+
+    final textMessage = types.TextMessage(
+      author: _user!,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      id: UniqueKey().toString(),
+      text: message.text,
+    );
+    _addMessage(textMessage);
+  }
+
+  void _addMessage(types.Message message) {
+    setState(() {
+      _messages.insert(0, message);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE8F5E9),
       appBar: AppBar(
-        backgroundColor: Color(0xFF24880C),
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         title: Row(
           children: <Widget>[
             CircleAvatar(
@@ -40,79 +77,28 @@ class _ChatScreenState extends State<ChatScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Lauren Spencer',
-                    style:
-                        TextStyle(color: Colors.white, fontFamily: 'Poppins')),
-                Text('online',
-                    style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                        fontFamily: 'Poppins')),
+                Text(
+                  "John Doe",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'online',
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),
               ],
             ),
           ],
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                return _messages[index];
-              },
+      body: _user == null
+          ? Center(
+              child:
+                  CircularProgressIndicator()) // Show loading while user data is being fetched
+          : Chat(
+              messages: _messages,
+              onSendPressed: _handleSendPressed,
+              user: _user!, // User is now non-nullable
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextField(
-                    controller: _textEditingController,
-                    decoration: InputDecoration(
-                      hintText: 'Enter your message',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 8.0),
-                CircleAvatar(
-                  backgroundColor: Color(0xFF4CAF50),
-                  child: IconButton(
-                    icon: Icon(Icons.send, color: Colors.white),
-                    onPressed: () {
-                      _sendMessage();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
-  }
-
-  void _sendMessage() {
-    String text = _textEditingController.text.trim();
-    if (text.isNotEmpty) {
-      setState(() {
-        _messages.add(
-          ChatScreen(
-            text: text,
-            isCurrentUser: true,
-            time: DateTime.now(),
-          ),
-        );
-      });
-      _textEditingController.clear(); // Clear text input field
-    }
   }
 }

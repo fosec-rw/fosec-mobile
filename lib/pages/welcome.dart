@@ -3,19 +3,53 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/pages/homepage.dart';
 import 'package:fosec/pages/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class GetStartedScreen extends StatelessWidget {
+class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({super.key});
 
-  // Simulated authentication check
-  bool isUserLoggedIn() {
-    // Replace this with actual authentication logic
-    // For example, checking a token in shared preferences or a user session
-    return false; // Change this to true if you want to simulate a logged-in user
+  @override
+  State<GetStartedScreen> createState() => _GetStartedScreenState();
+}
+
+class _GetStartedScreenState extends State<GetStartedScreen> {
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkLoginStatus();
+  }
+
+  //Implementing Shared Preferences
+  Future<void> _checkLoginStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? accessToken = prefs.getString('accessToken'); // Fetch accessToken
+
+    if (accessToken != null) {
+      // User is logged in, navigate to HomePage
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      // User is not logged in, remain on this screen
+      setState(() {
+        _isLoading = false; // No longer loading
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return Scaffold(
+        backgroundColor: Color(0xFFD6FFD5),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
       backgroundColor: Color(0xFFD6FFD5),
       body: Center(
@@ -62,13 +96,8 @@ class GetStartedScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                if (isUserLoggedIn()) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                } else {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
-                }
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
               },
               child: Text(
                 'Get Started',

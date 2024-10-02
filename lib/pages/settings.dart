@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:fosec/pages/homepage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fosec/pages/location.dart';
 import 'package:fosec/pages/login_page.dart';
 import 'package:fosec/pages/profile.dart';
@@ -135,13 +135,16 @@ class SettingsPage extends StatelessWidget {
             color: kLogoutColor,
             fontFamily: 'Poppins'),
       ),
-      onTap: () {
-        // Handle log out action
+      onTap: () async {
+        // Clear login status
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.remove('accessToken');
+
+        //Navigate to login page
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-              builder: (context) => LoginPage()), // Navigate to login page
-          (route) => false, // Remove all routes on top of the login page
+          MaterialPageRoute(builder: (context) => LoginPage()),
+          (route) => false,
         );
       },
     );

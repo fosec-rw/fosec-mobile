@@ -11,6 +11,7 @@ import 'package:fosec/pages/create-account/register_form.dart';
 import 'package:fosec/pages/homepage.dart';
 import 'package:fosec/pages/welcome.dart';
 import 'package:fosec/services/user_services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,6 +26,12 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final errorController = TextEditingController();
   bool _isLoading = false;
+
+  // Save login state using SharedPreferences
+  Future<void> _saveLoginState(String accessToken) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('accessToken', accessToken); // Mark user as logged in
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Remember me",
-                              style: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 13),
-                            ),
-                            Text(
-                              "Forgot Password",
+                              "Forgot Password?",
                               style: TextStyle(
                                   fontFamily: 'Poppins',
                                   color: Color(0xFF0F4901),
@@ -124,6 +126,10 @@ class _LoginPageState extends State<LoginPage> {
                                     final responseData = json.decode(response);
                                     if (responseData
                                         .containsKey('accessToken')) {
+                                      await _saveLoginState(
+                                        responseData['accessToken'],
+                                      );
+
                                       // Login successful, navigate to home page
                                       Navigator.push(
                                         context,
