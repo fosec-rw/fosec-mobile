@@ -25,7 +25,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
 
-  int _selectedIndex = 2;
+  int _selectedIndex = 3;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -33,12 +33,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
       if (index == 1) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingsPage()),
+          MaterialPageRoute(builder: (context) => MessagesListScreen()),
         );
-      } else if (index == 3) {
+      } else if (index == 2) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MessagesListScreen()),
+          MaterialPageRoute(builder: (context) => SettingsPage()),
         );
       } else if (index == 0) {
         Navigator.push(
@@ -56,7 +56,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
     String firstName = firstNameController.text;
     String lastName = lastNameController.text;
     String phoneNumber = phoneNumberController.text;
-    String email = emailController.text;
     String location = locationController.text;
 
     // // Update user logic
@@ -119,7 +118,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 SizedBox(
                   height: 5,
                 ),
-                Image.asset("images/profile.png"),
+                Icon(
+                  Icons.person_4,
+                  color: kPrimaryColor,
+                  size: 50,
+                ),
                 SizedBox(
                   height: 5,
                 ),
@@ -147,14 +150,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 SizedBox(
                   height: 5,
                 ),
-                FieldLabel(label: "Email"),
-                FormTextField(
-                  controller: emailController,
-                  obscureText: obscureText,
-                ),
-                SizedBox(
-                  height: 5,
-                ),
                 FieldLabel(label: "Location"),
                 FormTextField(
                     controller: locationController, obscureText: false),
@@ -175,16 +170,16 @@ class _UpdateProfileState extends State<UpdateProfile> {
             label: "Home",
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.message_rounded),
+            label: "Messages",
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: "Settings",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_rounded),
-            label: "Messages",
           ),
         ],
         currentIndex: _selectedIndex,

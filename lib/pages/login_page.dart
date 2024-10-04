@@ -33,6 +33,16 @@ class _LoginPageState extends State<LoginPage> {
     await prefs.setString('accessToken', accessToken); // Mark user as logged in
   }
 
+  Future<void> _saveUserCredentials(String userFirstName, String userLastName,
+      String userRole, String userPhone, String userId) async {
+    SharedPreferences userPrefs = await SharedPreferences.getInstance();
+    await userPrefs.setString('firstName', userFirstName);
+    await userPrefs.setString('lastName', userLastName);
+    await userPrefs.setString('role', userRole);
+    await userPrefs.setString('phone', userPhone);
+    await userPrefs.setString('id', userId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,6 +139,12 @@ class _LoginPageState extends State<LoginPage> {
                                       await _saveLoginState(
                                         responseData['accessToken'],
                                       );
+                                      await _saveUserCredentials(
+                                          responseData['user']['firstName'],
+                                          responseData['user']['lastName'],
+                                          responseData['user']['role'],
+                                          responseData['user']['phone'],
+                                          responseData['user']['id']);
 
                                       // Login successful, navigate to home page
                                       Navigator.push(

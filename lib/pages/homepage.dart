@@ -7,6 +7,7 @@ import 'package:fosec/components/tips_card.dart';
 import 'package:fosec/pages/Chats/messages_list.dart';
 import 'package:fosec/pages/Chats/chat_bot.dart';
 import 'package:fosec/pages/location.dart';
+import 'package:fosec/pages/notifications.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
 import 'package:fosec/pages/qr-code/start-scanning.dart';
@@ -34,17 +35,17 @@ class _HomePageState extends State<HomePage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (index == 1) {
+      if (index == 2) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => SettingsPage()),
         );
-      } else if (index == 3) {
+      } else if (index == 1) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => MessagesListScreen()),
         );
-      } else if (index == 2) {
+      } else if (index == 3) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => UpdateProfile()),
@@ -100,7 +101,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => Notifications())));
+            },
           ),
           GestureDetector(
             onTap: () {
@@ -267,16 +271,16 @@ class _HomePageState extends State<HomePage> {
             label: "Home",
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.message_rounded),
+            label: "Messages",
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: "Settings",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_rounded),
-            label: "Messages",
           ),
         ],
         currentIndex: _selectedIndex,
@@ -291,7 +295,6 @@ class _HomePageState extends State<HomePage> {
     return Container(
       margin: kPadding,
       padding: EdgeInsets.all(8.0),
-      height: 200,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -308,7 +311,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 4,
+            flex: 2,
             child: Image.asset(
               'images/image.png',
               fit: BoxFit.cover,
@@ -348,11 +351,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "12 May 2020",
+                  "8 October 2024",
                   style: TextStyle(
                     color: Color(0xFF696969),
                     fontWeight: FontWeight.w200,
-                    fontSize: 10,
+                    fontSize: 11,
                   ),
                 ),
               ],
