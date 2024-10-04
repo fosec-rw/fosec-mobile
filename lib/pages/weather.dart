@@ -38,8 +38,8 @@ class _WeatherPageState extends State<WeatherPage> {
 
   void _getWeatherData() async {
     try {
-      double lat = 39.7392;
-      double long = 104.9903;
+      double lat = 1.9403;
+      double long = 29.8739;
 
       var data = await fetchWeatherData(lat, long);
       setState(() {
@@ -107,10 +107,22 @@ class _WeatherPageState extends State<WeatherPage> {
                                 ),
                               ]),
                               Icon(
-                                Icons.sunny,
-                                color: Color(0XFFFAE41D),
+                                weatherData!['weather'][0]['description']
+                                        .contains("clouds")
+                                    ? Icons.cloud
+                                    : weatherData!['weather'][0]['description']
+                                            .contains("sky")
+                                        ? Icons.cloud_circle
+                                        : Icons.sunny,
+                                color: weatherData!['weather'][0]['description']
+                                        .contains("clouds")
+                                    ? kGreyColor
+                                    : weatherData!['weather'][0]['description']
+                                            .contains("sky")
+                                        ? Colors.blue
+                                        : Color(0XFFFAE41D),
                                 size: 45,
-                              ),
+                              )
                             ],
                           ),
                         ),
@@ -127,8 +139,6 @@ class _WeatherPageState extends State<WeatherPage> {
                                   formatTime(weatherData!['sys']['sunrise'])),
                               _buildInfoItem("Sunset",
                                   formatTime(weatherData!['sys']['sunset'])),
-                              _buildInfoItem("Humidity",
-                                  weatherData!['main']['humidity'].toString()),
                             ],
                           ),
                         ),
@@ -139,40 +149,12 @@ class _WeatherPageState extends State<WeatherPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              _buildInfoItem("Temperature", "24°C  21°C"),
-                              _buildInfoItem("Rainfall", "100mm"),
-                              _buildInfoItem("Humidity", "21°C"),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(height: 40),
-
-                        // Hourly Forecast
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Text(
-                            "Hourly Forecast",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: kPrimaryColor),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-
-                        Container(
-                          height: 100, // Adjust height as needed
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              _buildHourlyItem("Now", "24°C"),
-                              _buildHourlyItem("4 PM", "24°C"),
-                              _buildHourlyItem("5 PM", "24°C"),
-                              _buildHourlyItem("6 PM", "24°C"),
-                              _buildHourlyItem("7 PM", "24°C"),
-                              _buildHourlyItem("8 PM", "24°C"),
-                              // ... add more hourly items
+                              _buildInfoItem("Temperature min",
+                                  '${weatherData!['main']['temp_min']}'),
+                              _buildInfoItem("Temperature max",
+                                  '${weatherData!['main']['temp_max']}'),
+                              _buildInfoItem("Humidity",
+                                  weatherData!['main']['humidity'].toString()),
                             ],
                           ),
                         ),
@@ -195,13 +177,10 @@ class _WeatherPageState extends State<WeatherPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(
-                                    Icons.cloud,
-                                    size: 30,
-                                  ), // Adjust size
+                                  // Adjust size
                                   SizedBox(width: 10),
                                   Text(
-                                    "21°C, Partially Cloudy",
+                                    'Feels like ${weatherData!['main']['feels_like']} degrees',
                                     style: TextStyle(
                                         fontSize: 16, fontFamily: 'Poppins'),
                                   ),

@@ -140,11 +140,11 @@ class _LoginPageState extends State<LoginPage> {
                                         responseData['accessToken'],
                                       );
                                       await _saveUserCredentials(
-                                          responseData['user']['firstName'],
-                                          responseData['user']['lastName'],
-                                          responseData['user']['role'],
-                                          responseData['user']['phone'],
-                                          responseData['user']['id']);
+                                          responseData!['user']['firstName'],
+                                          responseData!['user']['lastName'],
+                                          responseData!['user']['role'],
+                                          responseData!['user']['phone'],
+                                          responseData!['user']['id']);
 
                                       // Login successful, navigate to home page
                                       Navigator.push(

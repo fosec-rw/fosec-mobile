@@ -58,95 +58,96 @@ class _LocationState extends State<Location> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
           },
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: _controller,
-                cursorColor: kPrimaryColor,
-                decoration: InputDecoration(
-                  hintText: 'Kigali, Nyarugenge, KN 457 AV',
-                  hintStyle: TextStyle(fontFamily: 'Poppins', fontSize: 15),
-                  focusColor: kPrimaryColor,
-                  fillColor: Color(0XFFF8FFF7),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              cursorColor: kPrimaryColor,
+              decoration: InputDecoration(
+                hintText: 'Kigali, Nyarugenge, KN 457 AV',
+                hintStyle: TextStyle(fontFamily: 'Poppins', fontSize: 15),
+                focusColor: kPrimaryColor,
+                fillColor: Color(0XFFF8FFF7),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              if (_filteredSuggestions.isNotEmpty)
-                Container(
-                  child: ListView.builder(
-                    itemCount: _filteredSuggestions.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          _filteredSuggestions[index],
-                          style: TextStyle(fontFamily: 'Poppins', fontSize: 15),
-                        ),
-                        onTap: () {
-                          _controller.text = _filteredSuggestions[index];
-                          setState(() {
-                            _filteredSuggestions.clear();
-                          });
-                        },
-                      );
-                    },
-                  ),
-                ),
-              SizedBox(height: 20),
-              Button(
-                onPressed: () {
-                  // Handle confirm action
-                },
-                text: 'Confirm',
-              ),
+            ),
+            if (_filteredSuggestions.isNotEmpty)
               SizedBox(
-                height: 35,
-              ),
-              Icon(
-                Icons.location_on,
-                size: 100,
-                color: kPrimaryColor,
-              ),
-              Text(
-                'Track your location ?',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                height: 150,
+                child: ListView.builder(
+                  itemCount: _filteredSuggestions.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        _filteredSuggestions[index],
+                        style: TextStyle(fontFamily: 'Poppins', fontSize: 15),
+                      ),
+                      onTap: () {
+                        _controller.text = _filteredSuggestions[index];
+                        setState(() {
+                          _filteredSuggestions.clear();
+                        });
+                      },
+                    );
+                  },
                 ),
               ),
-              SizedBox(
-                height: 10,
+            SizedBox(height: 20),
+            Button(
+              onPressed: () {
+                // Handle confirm action
+              },
+              text: 'Confirm',
+            ),
+            SizedBox(
+              height: 35,
+            ),
+            Icon(
+              Icons.location_on,
+              size: 100,
+              color: kPrimaryColor,
+            ),
+            Text(
+              'Track your location ?',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
               ),
-              Text(
-                'Allow to track your geolocation ? for better\nresults and save your time',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontFamily: 'Poppins'),
-              ),
-              SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle track my location action
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0XFF0F4901),
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  textStyle: TextStyle(fontSize: 18),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Allow to track your geolocation ? for better\nresults and save your time',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontFamily: 'Poppins'),
+            ),
+            SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                // Handle track my location action
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0XFF0F4901),
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                textStyle: TextStyle(fontSize: 18),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: Text('Track my Location'),
               ),
-            ],
-          ),
-        
+              child: Text('Track my Location'),
+            ),
+          ],
+        ),
       ),
     );
   }

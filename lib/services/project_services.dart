@@ -8,7 +8,7 @@ class ProjectService {
     final String url = '$baseUrl/project/create';
     return _postRequest(url, projectData);
   }
- 
+
   Future<String> _postRequest(String url, Map<String, dynamic> data) async {
     try {
       final response = await http.post(Uri.parse(url),
@@ -17,11 +17,13 @@ class ProjectService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response.body;
       } else {
-        throw Exception('Failed to post data');
+        print('Error Response: ${response.body}');
+        throw Exception(
+            'Failed to post data. Status Code: ${response.statusCode}');
       }
     } catch (e) {
+      print('Exception: ${e}');
       throw Exception('Failed to post data: $e');
     }
   }
 }
- 

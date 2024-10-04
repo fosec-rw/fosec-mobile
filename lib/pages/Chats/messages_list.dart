@@ -51,8 +51,10 @@ class MessagesListScreen extends StatelessWidget {
 
           return MessageTile(
             child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage('images/profile.png'),
+              leading: Icon(
+                Icons.person_4,
+                size: 30,
+                color: kPrimaryColor,
               ),
               title: Text(
                 'Lauren Spencer',

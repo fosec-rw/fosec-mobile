@@ -86,20 +86,7 @@ class _ProjectFormState extends State<ProjectForm> {
                           },
                         ),
                         SizedBox(height: 16.0),
-                        FieldLabel(label: "Current Location *"),
-                        SizedBox(height: 10.0),
-                        FormTextField(
-                          controller: locationController,
-                          obscureText: false,
-                          hintText: "Enter current location",
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter the current location';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 16.0),
+                        
                         FieldLabel(
                           label: "Description for the project *",
                         ),
