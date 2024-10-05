@@ -86,7 +86,6 @@ class _ProjectFormState extends State<ProjectForm> {
                           },
                         ),
                         SizedBox(height: 16.0),
-                        
                         FieldLabel(
                           label: "Description for the project *",
                         ),
@@ -131,6 +130,8 @@ class _ProjectFormState extends State<ProjectForm> {
                                       _isLoading = true; // Start loading
                                     });
 
+                                    await Future.delayed(Duration(seconds: 3));
+
                                     try {
                                       final response = await projectService
                                           .createProject({
@@ -167,6 +168,11 @@ class _ProjectFormState extends State<ProjectForm> {
                                       });
                                     }
                                   }
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              FinishRegister()));
                                 },
                         ),
                       ],

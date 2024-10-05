@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fosec/pages/Chats/messages_list.dart';
-import 'package:fosec/pages/formatTime.dart';
+import 'package:fosec/components/formatTime.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // For decoding JSON responses
 
@@ -38,8 +38,9 @@ class _WeatherPageState extends State<WeatherPage> {
 
   void _getWeatherData() async {
     try {
-      double lat = 1.9403;
+      double lat = -1.9403;
       double long = 29.8739;
+      //-1.5727499957613384, 29.51784326279706
 
       var data = await fetchWeatherData(lat, long);
       setState(() {
@@ -57,6 +58,7 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: kBackgroundColor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -103,7 +105,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                 Text(
                                   '${weatherData!['weather'][0]['description']}',
                                   style: TextStyle(
-                                      fontSize: 50, fontFamily: 'Poppins'),
+                                      fontSize: 35, fontFamily: 'Poppins'),
                                 ),
                               ]),
                               Icon(
@@ -113,14 +115,22 @@ class _WeatherPageState extends State<WeatherPage> {
                                     : weatherData!['weather'][0]['description']
                                             .contains("sky")
                                         ? Icons.cloud_circle
-                                        : Icons.sunny,
+                                        : weatherData!['weather'][0]
+                                                    ['description']
+                                                .contains("rain")
+                                            ? Icons.cloudy_snowing
+                                            : Icons.sunny,
                                 color: weatherData!['weather'][0]['description']
                                         .contains("clouds")
                                     ? kGreyColor
                                     : weatherData!['weather'][0]['description']
                                             .contains("sky")
                                         ? Colors.blue
-                                        : Color(0XFFFAE41D),
+                                        : weatherData!['weather'][0]
+                                                    ['description']
+                                                .contains("rain")
+                                            ? Colors.blue
+                                            : Color(0XFFFAE41D),
                                 size: 45,
                               )
                             ],
@@ -169,7 +179,7 @@ class _WeatherPageState extends State<WeatherPage> {
                               Text(
                                 "Today",
                                 style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Poppins'),
                               ),
@@ -179,8 +189,9 @@ class _WeatherPageState extends State<WeatherPage> {
                                 children: [
                                   // Adjust size
                                   SizedBox(width: 10),
+
                                   Text(
-                                    'Feels like ${weatherData!['main']['feels_like']} degrees',
+                                    'Feels ${_getTemperatureDescription(weatherData!['main']['feels_like'])}',
                                     style: TextStyle(
                                         fontSize: 16, fontFamily: 'Poppins'),
                                   ),
@@ -237,5 +248,17 @@ class _WeatherPageState extends State<WeatherPage> {
         ],
       ),
     );
+  }
+
+  String _getTemperatureDescription(double feelsLike) {
+    if (feelsLike < 10) {
+      return 'cold';
+    } else if (feelsLike >= 10 && feelsLike < 20) {
+      return 'cool';
+    } else if (feelsLike >= 20 && feelsLike < 30) {
+      return 'warm';
+    } else {
+      return 'hot';
+    }
   }
 }

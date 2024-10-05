@@ -2,10 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:fosec/components/button.dart';
-import 'package:fosec/pages/Chats/messages_list.dart';
 import 'package:fosec/pages/homepage.dart';
-import 'package:fosec/pages/profile.dart';
-import 'package:fosec/pages/settings.dart';
+import 'package:fosec/pages/location/geotracking.dart';
 
 class Location extends StatefulWidget {
   const Location({super.key});
@@ -16,13 +14,13 @@ class Location extends StatefulWidget {
 
 class _LocationState extends State<Location> {
   final List<String> _suggestions = [
-    'Kigali city, Kicukiro, KK 457 St',
-    'Kigali city, Nyarugenge, KN 457 AV',
-    'Kigali city, Kicukiro',
-    'Kigali city, Kicukiro, Kanombe',
-    'Kigali city, Kicukiro, KK 457 St',
-    'Kigali city, Kicukiro, KK 457 St',
-    'Kigali city, Kicukiro, KK 457 St',
+    'Nyabihu',
+    'Musanze',
+    'Murindi',
+    'Nyaruguru',
+    'Gisagara',
+    'Gakenke',
+    'Nyagatare',
   ];
   final TextEditingController _controller = TextEditingController();
   List<String> _filteredSuggestions = [];
@@ -42,7 +40,7 @@ class _LocationState extends State<Location> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller.dispose(); // Keep this as is
     super.dispose();
   }
 
@@ -71,9 +69,8 @@ class _LocationState extends State<Location> {
               controller: _controller,
               cursorColor: kPrimaryColor,
               decoration: InputDecoration(
-                hintText: 'Kigali, Nyarugenge, KN 457 AV',
+                hintText: 'Nyabihu',
                 hintStyle: TextStyle(fontFamily: 'Poppins', fontSize: 15),
-                focusColor: kPrimaryColor,
                 fillColor: Color(0XFFF8FFF7),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -82,7 +79,7 @@ class _LocationState extends State<Location> {
             ),
             if (_filteredSuggestions.isNotEmpty)
               SizedBox(
-                height: 150,
+                height: 100,
                 child: ListView.builder(
                   itemCount: _filteredSuggestions.length,
                   itemBuilder: (context, index) {
@@ -104,37 +101,48 @@ class _LocationState extends State<Location> {
             SizedBox(height: 20),
             Button(
               onPressed: () {
-                // Handle confirm action
+                // Show alert dialog when button is pressed
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: Text("Location set to: ${_controller.text}"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Close the dialog
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
               },
               text: 'Confirm',
             ),
-            SizedBox(
-              height: 35,
-            ),
+            SizedBox(height: 35),
             Icon(
               Icons.location_on,
               size: 100,
               color: kPrimaryColor,
             ),
             Text(
-              'Track your location ?',
+              'Track your location?',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             Text(
-              'Allow to track your geolocation ? for better\nresults and save your time',
+              'Allow to track your geolocation for better\nresults and save your time.',
               textAlign: TextAlign.center,
               style: TextStyle(fontFamily: 'Poppins'),
             ),
             SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                // Handle track my location action
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => GeoTracking()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0XFF0F4901),

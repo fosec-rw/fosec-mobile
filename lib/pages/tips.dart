@@ -2,10 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:fosec/components/tips_card.dart';
-import 'package:fosec/pages/Chats/messages_list.dart';
-import 'package:fosec/pages/homepage.dart';
-import 'package:fosec/pages/profile.dart';
-import 'package:fosec/pages/settings.dart';
 import 'package:fosec/pages/weather.dart';
 
 class TipsPage extends StatefulWidget {
@@ -14,31 +10,6 @@ class TipsPage extends StatefulWidget {
 }
 
 class _TipsPageState extends State<TipsPage> {
-  void _onItemTapped(int index) {
-    setState(() {
-      int _selectedIndex = index;
-      switch (index) {
-        case 0:
-          Navigator.push(
-              context, MaterialPageRoute(builder: ((context) => HomePage())));
-          break;
-        case 1:
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => SettingsPage())));
-          break;
-        case 2:
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => UpdateProfile())));
-          break;
-        case 3:
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => MessagesListScreen())));
-          break;
-        default:
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,35 +47,17 @@ class _TipsPageState extends State<TipsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Today's weather",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      "Want to know today's weather",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600),
                     ),
                     SizedBox(height: 10),
                     Row(
                       children: [
-                        Text(
-                          '24°C',
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
                         SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Cloudy',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
-                            ),
-                            Icon(
-                              Icons.cloud,
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                          ],
-                        ),
                         Spacer(),
                         ElevatedButton(
                           onPressed: () {
@@ -114,7 +67,7 @@ class _TipsPageState extends State<TipsPage> {
                             child: Row(
                               children: [
                                 Text(
-                                  'More',
+                                  'Check',
                                   style: TextStyle(fontFamily: 'Poppins'),
                                 ),
                                 Icon(

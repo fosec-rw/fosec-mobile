@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fosec/components/tips_card.dart';
 import 'package:fosec/pages/Chats/messages_list.dart';
 import 'package:fosec/pages/Chats/chat_bot.dart';
-import 'package:fosec/pages/location.dart';
+import 'package:fosec/pages/location/location.dart';
 import 'package:fosec/pages/notifications.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: kPadding,
               child: Text(
-                "Recent Tips & AI generated",
+                "Recent Tips",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 18,

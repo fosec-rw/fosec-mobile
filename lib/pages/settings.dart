@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fosec/pages/location.dart';
+import 'package:fosec/pages/location/location.dart';
 import 'package:fosec/pages/login_page.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
