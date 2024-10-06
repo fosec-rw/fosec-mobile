@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class ChatBot extends StatefulWidget {
   const ChatBot({Key? key}) : super(key: key);
@@ -115,7 +116,7 @@ class _ChatBotState extends State<ChatBot> {
           ),
           SizedBox(height: 5.0),
           Text(
-            "${message.time.hour}:${message.time.minute}",
+            DateFormat.jm().format(DateTime.now()),
             style: TextStyle(
                 color: Colors.grey, fontSize: 12.0, fontFamily: 'Poppins'),
           ),

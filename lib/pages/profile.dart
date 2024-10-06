@@ -53,17 +53,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   void handleUpdateUser() {
     // Your update logic here
-    String firstName = firstNameController.text;
-    String lastName = lastNameController.text;
-    String phoneNumber = phoneNumberController.text;
-    String location = locationController.text;
-
-    // // Update user logic
-    // // For example, make an API call to update the user profile
-    // print("First Name: $firstName");
-    // print("Last Name: $lastName");
-    // print("Phone Number: $phoneNumber");
-    // print("Email: $email");
+    // String firstName = firstNameController.text;
+    // String lastName = lastNameController.text;
+    // String phoneNumber = phoneNumberController.text;
   }
 
   @override
@@ -148,12 +140,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   obscureText: obscureText,
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 20,
                 ),
-                FieldLabel(label: "Location"),
-                FormTextField(
-                    controller: locationController, obscureText: false),
-                SizedBox(height: 20),
+                
                 Button(
                   text: "Update",
                   onPressed: handleUpdateUser,

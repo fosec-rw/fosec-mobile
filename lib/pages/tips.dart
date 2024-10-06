@@ -5,6 +5,7 @@ import 'package:fosec/components/tips_card.dart';
 import 'package:fosec/pages/weather.dart';
 
 class TipsPage extends StatefulWidget {
+  const TipsPage({super.key});
   @override
   _TipsPageState createState() => _TipsPageState();
 }

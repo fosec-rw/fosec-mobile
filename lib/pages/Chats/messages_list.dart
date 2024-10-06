@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
+import 'package:fosec/components/formatTime.dart';
 import 'package:fosec/components/message_tile.dart';
 import 'package:fosec/pages/Chats/chat_screen.dart';
 import 'package:fosec/pages/homepage.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/settings.dart';
+import 'package:intl/intl.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -19,6 +20,35 @@ class MessagesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // List of messages from different users
+    List<Message> messages = [
+      Message(
+          text: 'Hey, how are you?',
+          isCurrentUser: true,
+          time: DateTime.now(),
+          userName: 'Kaze Joanna'),
+      Message(
+          text: 'Tractors have revolutionized...',
+          isCurrentUser: false,
+          time: DateTime.now(),
+          userName: 'Habimana Jean'),
+      Message(
+          text: 'Are we still meeting later?',
+          isCurrentUser: true,
+          time: DateTime.now(),
+          userName: 'Alice Mukamana'),
+      Message(
+          text: 'I loved the presentation...',
+          isCurrentUser: false,
+          time: DateTime.now(),
+          userName: 'Didier Mugabo'),
+      Message(
+          text: 'Can you send me the documents?',
+          isCurrentUser: true,
+          time: DateTime.now(),
+          userName: 'Muteteri'),
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,23 +61,16 @@ class MessagesListScreen extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
             );
-            // handle back press
           },
         ),
         title: Text('Messages',
             style: TextStyle(color: Colors.white, fontFamily: 'Poppins')),
       ),
       body: ListView.builder(
-        itemCount: 15, // or use the actual length of your messages list
+        itemCount:
+            messages.length, // use the actual length of the messages list
         itemBuilder: (context, index) {
-          // Here you should define your message object or model
-          // Let's assume you have a Message class with text, isCurrentUser, and time properties
-          // Replace this with your actual message model
-          Message message = Message(
-            text: 'Hello',
-            isCurrentUser: true,
-            time: DateTime.now(),
-          );
+          Message message = messages[index];
 
           return MessageTile(
             child: ListTile(
@@ -57,19 +80,19 @@ class MessagesListScreen extends StatelessWidget {
                 color: kPrimaryColor,
               ),
               title: Text(
-                'Lauren Spencer',
+                message.userName, // User name from the message
                 style: TextStyle(
                     fontFamily: 'Poppins', fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
-                'Tractors have revolutionized modern farming practices...',
+                message.text, // Message text
                 style: TextStyle(fontFamily: 'Poppins', fontSize: 10),
               ),
               trailing: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    '2:37 PM',
+                    DateFormat.jm().format(DateTime.now()),
                     style: TextStyle(fontFamily: 'Poppins', fontSize: 11),
                   ),
                   Icon(Icons.check_circle, color: Color(0xFF0F4901), size: 20),
@@ -79,7 +102,9 @@ class MessagesListScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChatPage(),
+                    builder: (context) => ChatPage(
+                        title:
+                            message.userName), // Pass the user name to ChatPage
                   ),
                 );
               },
@@ -134,14 +159,17 @@ class MessagesListScreen extends StatelessWidget {
   }
 }
 
+// Message class with additional userName field
 class Message {
   final String text;
   final bool isCurrentUser;
   final DateTime time;
+  final String userName; // Add user name
 
   Message({
     required this.text,
     required this.isCurrentUser,
     required this.time,
+    required this.userName,
   });
 }

@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-String formatTime(int unixTimestamp) {
+String format_time(int unixTimestamp) {
   // Convert the UNIX timestamp (in seconds) to DateTime
   DateTime date = DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
 

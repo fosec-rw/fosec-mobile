@@ -6,7 +6,7 @@ import 'package:fosec/pages/location/location.dart';
 import 'package:fosec/pages/login_page.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
-import 'package:fosec/pages/qr-code/start-scanning.dart';
+import 'package:fosec/pages/qr-code/start_scanning.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);

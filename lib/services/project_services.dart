@@ -22,7 +22,7 @@ class ProjectService {
             'Failed to post data. Status Code: ${response.statusCode}');
       }
     } catch (e) {
-      print('Exception: ${e}');
+      print('Exception: $e');
       throw Exception('Failed to post data: $e');
     }
   }

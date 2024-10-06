@@ -47,7 +47,7 @@ class _ScanCodeState extends State<ScanCode> {
     });
     controller?.resumeCamera();
     scanTimer = Timer(
-        Duration(seconds: 15), _handleScanTimeout); // Set timer for 10 seconds
+        Duration(seconds: 10), _handleScanTimeout); // Set timer for 10 seconds
   }
 
   void _handleScanTimeout() {
@@ -88,7 +88,7 @@ class _ScanCodeState extends State<ScanCode> {
             ),
             SizedBox(height: 20),
             if (isScanning)
-              Container(
+              SizedBox(
                 height: 200,
                 width: 250,
                 child: QRView(
@@ -150,6 +150,8 @@ class _ScanCodeState extends State<ScanCode> {
 }
 
 class TamperedPage extends StatelessWidget {
+  const TamperedPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

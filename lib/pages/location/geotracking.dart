@@ -3,6 +3,8 @@ import 'package:fosec/components/button.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GeoTracking extends StatefulWidget {
+  const GeoTracking({super.key});
+
   @override
   _GeoTrackingState createState() => _GeoTrackingState();
 }
@@ -66,9 +68,9 @@ class _GeoTrackingState extends State<GeoTracking> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Geolocation Tracking'),
+        title: const Text('Geolocation Tracking'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -81,9 +83,9 @@ class _GeoTrackingState extends State<GeoTracking> {
             Text(
               _locationMessage,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Button(
               onPressed: _determinePosition,
               text: ('Get Current Location'),

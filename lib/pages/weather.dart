@@ -146,9 +146,9 @@ class _WeatherPageState extends State<WeatherPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               _buildInfoItem("Sunrise",
-                                  formatTime(weatherData!['sys']['sunrise'])),
+                                  format_time(weatherData!['sys']['sunrise'])),
                               _buildInfoItem("Sunset",
-                                  formatTime(weatherData!['sys']['sunset'])),
+                                  format_time(weatherData!['sys']['sunset'])),
                             ],
                           ),
                         ),
@@ -221,32 +221,6 @@ class _WeatherPageState extends State<WeatherPage> {
           style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
         ),
       ],
-    );
-  }
-
-  Widget _buildHourlyItem(String time, String temperature) {
-    return Container(
-      width: 80, // Adjust width
-      margin: EdgeInsets.symmetric(horizontal: 8),
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey), // Optional
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            time,
-            style: TextStyle(fontFamily: 'Poppins'),
-          ),
-          SizedBox(height: 5),
-          Text(
-            temperature,
-            style: TextStyle(fontFamily: 'Poppins'),
-          ),
-        ],
-      ),
     );
   }
 

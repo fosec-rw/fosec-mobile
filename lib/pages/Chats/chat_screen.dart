@@ -16,7 +16,9 @@ const kLogoutColor = Color(0xFFEA4335);
 const kPadding = EdgeInsets.all(10.0);
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+  final String title;
+
+  const ChatPage({super.key, required this.title});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -43,16 +45,16 @@ class _ChatPageState extends State<ChatPage> {
     // Set up user object for the chat
     setState(() {
       _user = types.User(
-        id: userId!,
+        id: userId,
         firstName: firstName,
         lastName: lastName,
       );
       _isLoading = false; // Finished loading user data
     });
 
-    print('User First Name: $firstName');
-    print('User ID: $userId');
-    print('Last Name: $lastName');
+    debugPrint('User First Name: $firstName');
+    debugPrint('User ID: $userId');
+    debugPrint('Last Name: $lastName');
   }
 
   void _handleSendPressed(types.PartialText message) {
@@ -66,7 +68,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _addMessage(types.Message message) {
-    print("Sending message: $message");
+    debugPrint("Sending message: $message");
     setState(() {
       _messages.insert(0, message);
     });
@@ -93,7 +95,7 @@ class _ChatPageState extends State<ChatPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Chat",
+                Text(widget.title,
                     style:
                         TextStyle(color: Colors.white, fontFamily: 'Poppins')),
                 Text('online',

@@ -10,7 +10,7 @@ import 'package:fosec/pages/location/location.dart';
 import 'package:fosec/pages/notifications.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
-import 'package:fosec/pages/qr-code/start-scanning.dart';
+import 'package:fosec/pages/qr-code/start_scanning.dart';
 import 'package:fosec/pages/settings.dart';
 import 'package:fosec/pages/tips.dart';
 import 'package:fosec/pages/weather.dart'; // Import the SettingsPage

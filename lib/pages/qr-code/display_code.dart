@@ -16,15 +16,15 @@ class DisplayQRCodePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF1A8500),
+        backgroundColor: const Color(0xFF1A8500),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_rounded),
+          icon: const Icon(Icons.arrow_back_rounded),
         ),
-        title: Text("QR Code Display"),
+        title: const Text("QR Code Display", style: TextStyle(fontFamily: 'Poppins'),),
       ),
       body: Center(
         child: Column(
@@ -47,8 +47,6 @@ class DisplayQRCodePage extends StatelessWidget {
                       data: data,
                       version: QrVersions.auto,
                       gapless: true,
-                      color: Colors.black,
-                      emptyColor: Colors.white,
                     ).toImageData(200);
                     final image =
                         pw.MemoryImage(Uint8List.view(qrImage!.buffer));
