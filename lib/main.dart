@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:fosec/pages/Chats/chat_screen.dart';
 import 'package:fosec/pages/welcome.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'dart:ui';
@@ -34,9 +35,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // textTheme: GoogleFonts.poppinsTextTheme(),
-        primarySwatch: myCustomGreen,
-      ),
+          // textTheme: GoogleFonts.poppinsTextTheme(),
+          primarySwatch: myCustomGreen,
+          appBarTheme: AppBarTheme(
+            titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          progressIndicatorTheme:
+              ProgressIndicatorThemeData(color: kPrimaryColor)),
       home: GetStartedScreen(),
     );
   }

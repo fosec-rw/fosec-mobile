@@ -1,18 +1,25 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:fosec/pages/tips.dart';
+import 'package:fosec/pages/tips/tips.dart';
+import 'package:fosec/pages/tips/tips_info.dart';
 
 class Tips extends StatelessWidget {
   final String headline; // Headline of the tip
   final String description; // The small text description
   final String imageUrl; // Link to the image of the tip
+  final String? desc1;
+  final String? desc2;
+  final String? desc3;
 
   const Tips(
       {super.key,
       required this.headline,
       required this.description,
-      required this.imageUrl});
+      required this.imageUrl,
+      this.desc1,
+      this.desc2,
+      this.desc3});
 
   @override
   Widget build(BuildContext context) {
@@ -61,29 +68,31 @@ class Tips extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            fontSize: 14,
+                            fontSize: 13,
                           ),
                         ),
                       ),
                       Icon(
                         Icons.more_vert_rounded,
-                        size: 15,
+                        size: 10,
                       )
                     ],
                   ),
-                  SizedBox(height: 5),
                   Text(
                     description,
                     maxLines: 3,
                     style: TextStyle(
                       color: Color(0xFF696969),
-                      fontSize: 12,
+                      fontSize: 11,
                     ),
+                  ),
+                  SizedBox(
+                    height: 3,
                   ),
                   Center(
                     child: Container(
-                      width: 25,
-                      height: 25,
+                      width: 23,
+                      height: 23,
                       margin: EdgeInsets.all(6),
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -94,7 +103,7 @@ class Tips extends StatelessWidget {
                           )),
                       child: Icon(
                         Icons.arrow_forward,
-                        size: 15,
+                        size: 13,
                         color: Colors.black,
                       ),
                     ),
@@ -107,7 +116,15 @@ class Tips extends StatelessWidget {
       ),
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: ((context) => TipsPage())));
+            context,
+            MaterialPageRoute(
+                builder: ((context) => MoreTipsInfo(
+                      title: headline,
+                      imageUrl: imageUrl,
+                      desc1: headline,
+                      desc2: desc2,
+                      desc3: desc3,
+                    ))));
       },
     );
   }

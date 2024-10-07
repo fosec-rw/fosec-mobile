@@ -7,6 +7,8 @@ import 'package:fosec/components/text_field.dart';
 import 'package:fosec/pages/Chats/messages_list.dart';
 import 'package:fosec/pages/homepage.dart';
 import 'package:fosec/pages/settings.dart';
+import 'package:fosec/services/update_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const kPrimaryColor = Color(0xFF1A8500);
 const kGreyColor = Color(0xFF808080);
@@ -22,8 +24,47 @@ class _UpdateProfileState extends State<UpdateProfile> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController locationController = TextEditingController();
+
+  bool _isLoading = false;
+  bool obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserDetails();
+  }
+
+  Future<void> _loadUserDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      firstNameController.text = prefs.getString('firstName') ?? '';
+      lastNameController.text = prefs.getString('lastName') ?? '';
+      phoneNumberController.text = prefs.getString('phone') ?? '';
+    });
+  }
+
+  void handleUpdateUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    String firstName = firstNameController.text;
+    String lastName = lastNameController.text;
+    String phone = phoneNumberController.text;
+
+    try {
+      await updateUser(firstName, lastName, phone);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Profile updated sucessfully"),
+      ));
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Error updating profile")));
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   int _selectedIndex = 3;
 
@@ -49,21 +90,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
     });
   }
 
-  bool obscureText = false; // Placeholder for the obscureText property
-
-  void handleUpdateUser() {
-    // Your update logic here
-    // String firstName = firstNameController.text;
-    // String lastName = lastNameController.text;
-    // String phoneNumber = phoneNumberController.text;
-  }
-
   @override
   void dispose() {
     firstNameController.dispose();
     lastNameController.dispose();
     phoneNumberController.dispose();
-    emailController.dispose();
     super.dispose();
   }
 
@@ -142,9 +173,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 SizedBox(
                   height: 20,
                 ),
-                
+
                 Button(
-                  text: "Update",
+                  text: _isLoading ? "Loading..." : "Update",
                   onPressed: handleUpdateUser,
                 )
               ],

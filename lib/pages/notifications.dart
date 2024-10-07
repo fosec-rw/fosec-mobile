@@ -6,7 +6,7 @@ import 'package:fosec/pages/Chats/messages_list.dart';
 import 'package:fosec/pages/homepage.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/settings.dart';
-import 'package:fosec/pages/tips.dart';
+import 'package:fosec/pages/tips/tips.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);

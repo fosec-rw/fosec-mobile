@@ -41,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
     await userPrefs.setString('role', userRole);
     await userPrefs.setString('phone', userPhone);
     await userPrefs.setString('id', userId);
+    print(userFirstName);
   }
 
   @override

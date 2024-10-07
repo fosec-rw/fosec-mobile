@@ -12,8 +12,9 @@ import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
 import 'package:fosec/pages/qr-code/start_scanning.dart';
 import 'package:fosec/pages/settings.dart';
-import 'package:fosec/pages/tips.dart';
-import 'package:fosec/pages/weather.dart'; // Import the SettingsPage
+import 'package:fosec/pages/tips/tips.dart';
+import 'package:fosec/pages/weather.dart';
+import 'package:fosec/pages/welcome.dart'; // Import the SettingsPage
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -311,7 +312,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 2,
+            flex: 5,
             child: Image.asset(
               'images/image.png',
               fit: BoxFit.cover,
@@ -337,7 +338,18 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Icon(Icons.more_vert_rounded),
+                    IconButton(
+                      icon: Icon(
+                        Icons.more_vert_rounded,
+                        size: 20,
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => GetStartedScreen()));
+                      },
+                    ),
                   ],
                 ),
                 SizedBox(height: 5),

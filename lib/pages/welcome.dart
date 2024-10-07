@@ -14,6 +14,7 @@ class GetStartedScreen extends StatefulWidget {
 
 class _GetStartedScreenState extends State<GetStartedScreen> {
   bool _isLoading = true;
+  String? _accessToken;
 
   @override
   void initState() {
@@ -21,23 +22,15 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
     _checkLoginStatus();
   }
 
-  //Implementing Shared Preferences
+  // Implementing Shared Preferences
   Future<void> _checkLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? accessToken = prefs.getString('accessToken'); // Fetch accessToken
 
-    if (accessToken != null) {
-      // User is logged in, navigate to HomePage
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-    } else {
-      // User is not logged in, remain on this screen
-      setState(() {
-        _isLoading = false; // No longer loading
-      });
-    }
+    setState(() {
+      _accessToken = accessToken;
+      _isLoading = false; // No longer loading, show the Get Started button
+    });
   }
 
   @override
@@ -96,12 +89,23 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 ),
               ),
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                // Navigate to HomePage if logged in, otherwise to LoginPage
+                if (_accessToken != null) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                } else {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                }
               },
               child: Text(
                 'Get Started',
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 15),
+                style: TextStyle(
+                    fontFamily: 'Poppins', fontSize: 15, color: Colors.white),
               ),
             ),
           ],

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:fosec/pages/Chats/messages_list.dart';
 import 'package:fosec/components/formatTime.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert'; // For decoding JSON responses
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart'; // For decoding JSON responses
 
 Future<Map<String, dynamic>> fetchWeatherData(double lat, double long) async {
   final response = await http.get(
@@ -38,9 +40,12 @@ class _WeatherPageState extends State<WeatherPage> {
 
   void _getWeatherData() async {
     try {
-      double lat = -1.9403;
-      double long = 29.8739;
-      //-1.5727499957613384, 29.51784326279706
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      double lat =
+          prefs.getDouble('latitude') ?? -1.9403; // Use default value if null
+      double long = prefs.getDouble('longitude') ??
+          29.8739; // Assuming longitude stored as well
 
       var data = await fetchWeatherData(lat, long);
       setState(() {
@@ -65,8 +70,7 @@ class _WeatherPageState extends State<WeatherPage> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color:
-                  kPrimaryColor, // Replace kPrimaryColor with your actual color
+              color: kPrimaryColor,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -78,7 +82,10 @@ class _WeatherPageState extends State<WeatherPage> {
           ),
         ),
         body: isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? Center(
+                child: CircularProgressIndicator(
+                color: kPrimaryColor,
+              ))
             : weatherData != null
                 ? SingleChildScrollView(
                     child: Column(
@@ -160,11 +167,11 @@ class _WeatherPageState extends State<WeatherPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               _buildInfoItem("Temperature min",
-                                  '${weatherData!['main']['temp_min']}'),
+                                  '${weatherData!['main']['temp_min']}°C'),
                               _buildInfoItem("Temperature max",
-                                  '${weatherData!['main']['temp_max']}'),
+                                  '${weatherData!['main']['temp_max']}°C'),
                               _buildInfoItem("Humidity",
-                                  weatherData!['main']['humidity'].toString()),
+                                  '${weatherData!['main']['humidity']}%'),
                             ],
                           ),
                         ),
