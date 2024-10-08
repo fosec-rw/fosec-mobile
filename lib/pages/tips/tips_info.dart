@@ -71,10 +71,16 @@ class MoreTipsInfo extends StatelessWidget {
                   style: const TextStyle(
                       fontWeight: FontWeight.w400, fontSize: 15),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Text(
                   desc2!,
                   style: const TextStyle(
                       fontWeight: FontWeight.w400, fontSize: 15),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 Text(
                   desc3!,

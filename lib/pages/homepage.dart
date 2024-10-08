@@ -13,8 +13,8 @@ import 'package:fosec/pages/qr-code/generate_code.dart';
 import 'package:fosec/pages/qr-code/start_scanning.dart';
 import 'package:fosec/pages/settings.dart';
 import 'package:fosec/pages/tips/tips.dart';
+import 'package:fosec/pages/tips/tips_data.dart';
 import 'package:fosec/pages/weather.dart';
-import 'package:fosec/pages/welcome.dart'; // Import the SettingsPage
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -226,23 +226,21 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Tips(
-              headline: "Farmers Championing Sustainable Crop Growth : ",
-              description:
-                  "In an era where environmental concerns have taken center stage, farmers have emerged as crucial stewards of sustainable crop growth",
-              imageUrl: "images/image.png",
-            ),
-            Tips(
-              headline: "Farmers Championing Sustainable Crop Growth : ",
-              description:
-                  "In an era where environmental concerns have taken center stage, farmers have emerged as crucial stewards of sustainable crop growth",
-              imageUrl: "images/image.png",
-            ),
-            Tips(
-              headline: "Farmers Championing Sustainable Crop Growth : ",
-              description:
-                  "In an era where environmental concerns have taken center stage, farmers have emerged as crucial stewards of sustainable crop growth",
-              imageUrl: "images/image.png",
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: 3,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final tip = TipsData[index];
+                return Tips(
+                  headline: tip['headline']!,
+                  description: tip['description']!,
+                  imageUrl: tip['imageUrl']!,
+                  desc1: tip['desc1']!,
+                  desc2: tip['desc2']!,
+                  desc3: tip['desc3']!,
+                );
+              },
             ),
             Padding(
               padding: kPadding,

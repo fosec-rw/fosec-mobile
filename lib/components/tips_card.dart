@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:fosec/pages/tips/tips.dart';
 import 'package:fosec/pages/tips/tips_info.dart';
 
 class Tips extends StatelessWidget {
@@ -78,6 +77,9 @@ class Tips extends StatelessWidget {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Text(
                     description,
                     maxLines: 3,
@@ -121,7 +123,7 @@ class Tips extends StatelessWidget {
                 builder: ((context) => MoreTipsInfo(
                       title: headline,
                       imageUrl: imageUrl,
-                      desc1: headline,
+                      desc1: desc1!,
                       desc2: desc2,
                       desc3: desc3,
                     ))));

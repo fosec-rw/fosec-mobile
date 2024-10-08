@@ -7,6 +7,7 @@ import 'package:fosec/pages/login_page.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
 import 'package:fosec/pages/qr-code/start_scanning.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -51,18 +52,18 @@ class SettingsPage extends StatelessWidget {
           _buildSettingsOption(
             icon: Icons.phone,
             title: 'Phone number',
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => UpdateProfile()));
+            },
           ),
           _buildSettingsOption(
             icon: Icons.email,
             title: 'Email',
-          ),
-          _buildSettingsOption(
-            icon: Icons.lock,
-            title: 'Password',
-          ),
-          _buildSettingsOption(
-            icon: Icons.language,
-            title: 'Language',
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => UpdateProfile()));
+            },
           ),
           SizedBox(height: 16.0),
           _buildSectionHeader('App settings'),
@@ -90,10 +91,16 @@ class SettingsPage extends StatelessWidget {
           _buildSettingsOption(
             icon: Icons.perm_device_information,
             title: 'Permissions',
-          ),
-          _buildSettingsOption(
-            icon: Icons.brightness_4,
-            title: 'Theme',
+            onTap: () async {
+              final Uri url = Uri.parse('app-settings:');
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Could not launch app settings')),
+                );
+              }
+            },
           ),
           SizedBox(height: 32.0),
           _buildLogoutOption(context),

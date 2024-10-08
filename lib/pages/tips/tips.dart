@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fosec/components/tips_card.dart';
+import 'package:fosec/pages/tips/tips_data.dart';
 import 'package:fosec/pages/weather.dart';
 
 class TipsPage extends StatefulWidget {
@@ -110,32 +111,22 @@ class _TipsPageState extends State<TipsPage> {
                 ),
               ),
               SizedBox(height: 20),
-              Tips(
-                  headline: "How to improve your irrigation skills ?",
-                  description:
-                      "In an era where environmental concerns have taken center stage, farmers have emerged as crucial stewards of sustainable crop growth",
-                  imageUrl: 'images/image.png'),
-              Tips(
-                  headline: "New maize harvesting technique !",
-                  description:
-                      "In an era where environmental concerns have taken center stage, farmers have emerged as crucial stewards of sustainable crop growth",
-                  imageUrl: 'images/image.png'),
-              Tips(
-                  headline: "Resist the destructive fury of storms !",
-                  description:
-                      "In an era where environmental concerns have taken center stage, farmers have emerged as crucial stewards of sustainable crop growth",
-                  imageUrl: 'images/image.png'),
-              Tips(
-                  headline: "Farmers Championing Sustainable Crop Growth : ",
-                  description:
-                      "In an era where environmental concerns have taken center stage, farmers have emerged as crucial stewards of sustainable crop growth",
-                  imageUrl: 'images/image.png'),
-              Tips(
-                  headline:
-                      "Dear Farmers, remember to use crates not sacks for transportation : ",
-                  description:
-                      "In an era where environmental concerns have taken center stage, farmers have emerged as crucial stewards of sustainable crop growth",
-                  imageUrl: 'images/image.png'),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: TipsData.length,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final tip = TipsData[index];
+                  return Tips(
+                    headline: tip['headline']!,
+                    description: tip['description']!,
+                    imageUrl: tip['imageUrl']!,
+                    desc1: tip['desc1']!,
+                    desc2: tip['desc2']!,
+                    desc3: tip['desc3']!,
+                  );
+                },
+              )
             ],
           ),
         ),
