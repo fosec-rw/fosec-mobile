@@ -3,7 +3,7 @@ const TipsData = [
     'headline': 'Mastering Efficient Irrigation Techniques',
     'description':
         'Drip irrigation and moisture control are key strategies for water conservation and crop health.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/irrigation.jpg',
     'desc1':
         'Drip irrigation is a great way to save water and deliver it directly to your plants\' roots. This minimizes waste and ensures your crops get the hydration they need.',
     'desc2':
@@ -15,7 +15,7 @@ const TipsData = [
     'headline': 'Shield Your Crops from Storm Damage',
     'description':
         'Windbreaks and proper drainage techniques can safeguard your fields from severe weather.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/storm.jpg',
     'desc1':
         'Planting windbreaks like trees or shrubs around your fields can protect your crops from strong winds during storms. These barriers reduce wind speed and potential damage.',
     'desc2':
@@ -27,7 +27,7 @@ const TipsData = [
     'headline': 'Storm Resilience for Your Fields',
     'description':
         'Windbreaks and drainage systems are essential to help your crops survive severe weather.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/storm-resilience.jpg',
     'desc1':
         'Storms can wreak havoc on your crops, but using windbreaks like trees or shrubs can help protect your fields. These natural barriers reduce wind speed and lessen the risk of damage.',
     'desc2':
@@ -39,7 +39,7 @@ const TipsData = [
     'headline': 'Sustainable Crop Growth for a Better Tomorrow',
     'description':
         'Crop rotation, organic fertilizers, and natural pest control are pillars of sustainable farming.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/sustainable.jpg',
     'desc1':
         'Sustainable farming is key to keeping your land fertile. Crop rotation is a smart way to maintain soil health, reduce pests, and minimize the need for chemical fertilizers.',
     'desc2':
@@ -51,7 +51,7 @@ const TipsData = [
     'headline': 'Safe and Efficient Crop Transportation Tips',
     'description':
         'Switching from sacks to crates can improve the freshness of your produce and enhance its market appeal.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/transportation.jpg',
     'desc1':
         'Using crates instead of sacks for crop transportation can make a huge difference. Crates protect your produce from bruising and allow better air circulation, keeping it fresher for longer.',
     'desc2':
@@ -63,7 +63,7 @@ const TipsData = [
     'headline': 'Combat Pests Naturally for Healthier Crops',
     'description':
         'Utilize natural pest control methods to keep your crops safe without harming the environment.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/pest.jpg',
     'desc1':
         'Instead of relying on chemical pesticides, introduce beneficial insects like ladybugs or predatory beetles to control pest populations naturally.',
     'desc2':
@@ -75,7 +75,7 @@ const TipsData = [
     'headline': 'Optimizing Crop Yields Through Smart Soil Management',
     'description':
         'Maintaining healthy soil is essential for boosting crop production and long-term sustainability.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/soil.jpg',
     'desc1':
         'Test your soil regularly to ensure it has the right balance of nutrients. This helps you tailor your fertilization methods for optimal growth.',
     'desc2':

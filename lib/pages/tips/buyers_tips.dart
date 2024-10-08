@@ -3,7 +3,7 @@ const BuyerTipsData = [
     'headline': 'Choose Seasonal Produce for Better Flavor and Value',
     'description':
         'Buying fruits and vegetables in season ensures peak freshness and taste while often being more affordable.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/seasonal.jpg',
     'desc1':
         'Seasonal produce is harvested at its peak ripeness, leading to better flavor and nutrition. Check local seasonal guides to know what’s available.',
     'desc2':
@@ -15,7 +15,7 @@ const BuyerTipsData = [
     'headline': 'Inspect Produce for Quality Before Buying',
     'description':
         'Take time to examine fruits and vegetables to ensure you’re selecting the best quality items.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/inspect.jpg',
     'desc1':
         'Look for vibrant colors and firm textures. Avoid produce with bruises, soft spots, or discoloration as they may be overripe or spoiled.',
     'desc2':
@@ -27,7 +27,7 @@ const BuyerTipsData = [
     'headline': 'Support Local Farmers and Markets',
     'description':
         'Buying directly from local farmers and markets benefits the community and often provides fresher options.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/support.jpg',
     'desc1':
         'Local farmers’ markets typically offer fresher produce since it’s harvested closer to the time of sale, often resulting in better flavor.',
     'desc2':
@@ -39,7 +39,7 @@ const BuyerTipsData = [
     'headline': 'Prioritize Organic and Sustainable Products',
     'description':
         'Choosing organic and sustainably grown produce can enhance your health and protect the environment.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/sustainable.jpg',
     'desc1':
         'Organic farming practices avoid synthetic pesticides and fertilizers, reducing your exposure to harmful chemicals.',
     'desc2':
@@ -51,7 +51,7 @@ const BuyerTipsData = [
     'headline': 'Know Your Produce Storage and Handling',
     'description':
         'Proper storage and handling of fruits and vegetables extend their shelf life and maintain quality.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/storage.png',
     'desc1':
         'Store fruits and vegetables in the right conditions; for instance, keep apples in a cool place away from other produce to prevent spoilage.',
     'desc2':
@@ -63,7 +63,7 @@ const BuyerTipsData = [
     'headline': 'Plan Your Purchases to Minimize Waste',
     'description':
         'Planning your meals and shopping list helps reduce waste and ensures you buy only what you need.',
-    'imageUrl': 'images/image.png',
+    'imageUrl': 'images/waste.jpg',
     'desc1':
         'Create a weekly meal plan and shopping list to ensure you buy only the items you will use, helping you save money and reduce waste.',
     'desc2':

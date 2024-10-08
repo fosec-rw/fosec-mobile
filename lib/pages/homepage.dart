@@ -213,15 +213,19 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: ((context) => ScanCode())));
               },
             ),
-            ListTile(
-              leading: Icon(Icons.qr_code_scanner, color: kPrimaryColor),
-              title: Text('QR Generate'),
-              onTap: () {
-                // Handle the tap event
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => GenerateCode())));
-              },
-            ),
+            userRole == 'Farmer'
+                ? ListTile(
+                    leading: Icon(Icons.qr_code_scanner, color: kPrimaryColor),
+                    title: Text('QR Generate'),
+                    onTap: () {
+                      // Handle the tap event
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => GenerateCode())));
+                    },
+                  )
+                : SizedBox.shrink()
           ],
         ),
       ),

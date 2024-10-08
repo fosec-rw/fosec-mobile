@@ -114,7 +114,6 @@ class _ChatPageState extends State<ChatPage> {
                   CircularProgressIndicator()) // Show loader while fetching data
           : Chat(
               messages: _messages,
-              
               onSendPressed: _handleSendPressed,
               user: _user,
               theme: DefaultChatTheme(

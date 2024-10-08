@@ -6,7 +6,7 @@ class Button extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
 
-  const Button({Key? key, required this.text, this.onPressed})
+  const Button({Key? key, required this.text, this.onPressed, bool? isEnabled})
       : super(key: key);
 
   @override
