@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:fosec/components/tips_card.dart';
+import 'package:fosec/pages/tips/buyers_tips.dart';
 import 'package:fosec/pages/tips/tips_data.dart';
 import 'package:fosec/pages/weather.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TipsPage extends StatefulWidget {
   const TipsPage({super.key});
@@ -12,6 +14,20 @@ class TipsPage extends StatefulWidget {
 }
 
 class _TipsPageState extends State<TipsPage> {
+  String? userRole;
+
+  Future<void> _fetchRole() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userRole = prefs.getString('role');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchRole();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,10 +129,14 @@ class _TipsPageState extends State<TipsPage> {
               SizedBox(height: 20),
               ListView.builder(
                 shrinkWrap: true,
-                itemCount: TipsData.length,
+                itemCount: userRole == 'Farmer'
+                    ? TipsData.length
+                    : BuyerTipsData.length,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  final tip = TipsData[index];
+                  final tip = userRole == 'Farmer'
+                      ? TipsData[index]
+                      : BuyerTipsData[index];
                   return Tips(
                     headline: tip['headline']!,
                     description: tip['description']!,

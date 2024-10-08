@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
     await userPrefs.setString('role', userRole);
     await userPrefs.setString('phone', userPhone);
     await userPrefs.setString('id', userId);
-    print(userFirstName);
+    // print(userRole);
   }
 
   @override
@@ -105,18 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color: Color(0xFF0F4901),
-                                  fontSize: 13),
-                            ),
-                          ],
-                        ),
+
                         SizedBox(height: 16.0),
                         Button(
                           text: _isLoading ? "Loading..." : "Sign In",

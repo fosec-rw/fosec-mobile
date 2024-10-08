@@ -146,6 +146,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             Card(
+                              color: Colors.white,
                               child: Column(
                                 children: [
                                   RadioListTile(

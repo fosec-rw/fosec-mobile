@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fosec/components/app_bar.dart';
 import 'package:fosec/components/button.dart';
-import 'package:fosec/pages/homepage.dart';
+import 'package:fosec/pages/login_page.dart';
 
 class FinishRegister extends StatelessWidget {
   const FinishRegister({super.key});
@@ -40,7 +40,7 @@ class FinishRegister extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        "It's the time now  you can explore the platform and do what you want with our AI. you will be provided the details and tips by the AI and everything you need.",
+                        "It's the time now  you can explore the platform and do what you want with our app. You will be provided the tips and everything you need.",
                         style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Poppins',
@@ -63,7 +63,7 @@ class FinishRegister extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomePage(),
+                                builder: (context) => LoginPage(),
                               ));
                         },
                       ),

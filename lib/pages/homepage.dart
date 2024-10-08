@@ -12,9 +12,11 @@ import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/qr-code/generate_code.dart';
 import 'package:fosec/pages/qr-code/start_scanning.dart';
 import 'package:fosec/pages/settings.dart';
+import 'package:fosec/pages/tips/buyers_tips.dart';
 import 'package:fosec/pages/tips/tips.dart';
 import 'package:fosec/pages/tips/tips_data.dart';
 import 'package:fosec/pages/weather.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -32,6 +34,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
+  String? userRole;
+
+  Future<void> _fetchRole() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userRole = prefs.getString('role');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchRole();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -218,7 +233,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: kPadding,
               child: Text(
-                "Recent Tips",
+                "Recent Tips for ${"${userRole}s"} ",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 18,
@@ -231,7 +246,9 @@ class _HomePageState extends State<HomePage> {
               itemCount: 3,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                final tip = TipsData[index];
+                final tip = userRole == 'Farmer'
+                    ? TipsData[index]
+                    : BuyerTipsData[index];
                 return Tips(
                   headline: tip['headline']!,
                   description: tip['description']!,

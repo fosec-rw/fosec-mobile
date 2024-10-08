@@ -77,9 +77,6 @@ class Tips extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
                   Text(
                     description,
                     maxLines: 3,
@@ -87,9 +84,6 @@ class Tips extends StatelessWidget {
                       color: Color(0xFF696969),
                       fontSize: 11,
                     ),
-                  ),
-                  SizedBox(
-                    height: 3,
                   ),
                   Center(
                     child: Container(

@@ -7,6 +7,7 @@ import 'package:fosec/pages/homepage.dart';
 import 'package:fosec/pages/profile.dart';
 import 'package:fosec/pages/settings.dart';
 import 'package:fosec/pages/tips/tips.dart';
+import 'package:intl/intl.dart';
 
 const kBackgroundColor = Color(0xFFEFFFEF);
 const kPrimaryColor = Color(0xFF1A8500);
@@ -39,7 +40,7 @@ class Notifications extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontFamily: 'Poppins')),
       ),
       body: ListView.builder(
-        itemCount: 2, // or use the actual length of your messages list
+        itemCount: 1, // or use the actual length of your messages list
         itemBuilder: (context, index) {
           return MessageTile(
             child: ListTile(
@@ -51,7 +52,7 @@ class Notifications extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    '2:37 PM',
+                    DateFormat.jm().format(DateTime.now()),
                     style: TextStyle(fontFamily: 'Poppins', fontSize: 11),
                   ),
                   Icon(Icons.check_circle, color: Color(0xFF0F4901), size: 20),

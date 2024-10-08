@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:fosec/components/formatTime.dart';
 import 'package:fosec/components/message_tile.dart';
 import 'package:fosec/pages/Chats/chat_screen.dart';
 import 'package:fosec/pages/homepage.dart';

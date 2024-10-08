@@ -166,9 +166,9 @@ class _WeatherPageState extends State<WeatherPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              _buildInfoItem("Temperature min",
+                              _buildInfoItem("Temp min",
                                   '${weatherData!['main']['temp_min']}°C'),
-                              _buildInfoItem("Temperature max",
+                              _buildInfoItem("Temp max",
                                   '${weatherData!['main']['temp_max']}°C'),
                               _buildInfoItem("Humidity",
                                   '${weatherData!['main']['humidity']}%'),

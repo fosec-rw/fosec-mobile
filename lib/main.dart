@@ -38,8 +38,8 @@ class MyApp extends StatelessWidget {
           // textTheme: GoogleFonts.poppinsTextTheme(),
           primarySwatch: myCustomGreen,
           appBarTheme: AppBarTheme(
-            titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
-          ),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+              iconTheme: IconThemeData(color: Colors.white)),
           progressIndicatorTheme:
               ProgressIndicatorThemeData(color: kPrimaryColor)),
       home: GetStartedScreen(),
